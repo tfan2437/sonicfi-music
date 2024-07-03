@@ -31,6 +31,7 @@ const DisplayHome = () => {
               image={item.image}
               name={item.name}
               desc={item.desc}
+              id={item.id}
             />
           ))}
         </div>
