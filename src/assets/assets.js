@@ -1,4 +1,4 @@
-import bell_icon from "./bell.png";
+import bell_icon from "./icon-bell.png";
 import home_icon from "./home.png";
 import like_icon from "./like.png";
 import loop_icon from "./loop.png";

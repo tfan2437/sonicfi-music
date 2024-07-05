@@ -22,13 +22,17 @@ const Navbar = () => {
           />
         </div>
         <div className="flex items-center gap-4">
-          <p className="bg-white text-black text-[15px] px-4 py-1 rounded-2xl hidden md:block cursor-pointer">
+          <p className="bg-black border-[1.5px] border-[#616161] hover:border-[#ffffff] text-[#616161] hover:text-[#ffffff] text-[15px] px-4 py-1 rounded-2xl hidden md:block cursor-pointer">
             Explore Premium
           </p>
-          <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
-            Install App
-          </p>
-          <p className="bg-purple-500 text-black w-7 h-7 rounded-full flex items-center justify-center">
+          <div className="hidden md:flex justify-center items-center bg-black w-[33.5px] h-[33.5px] border-[1.5px] border-[#616161] hover:border-[#ffffff] text-[#616161] hover:text-[#ffffff] rounded-full cursor-pointer">
+            <img
+              className="h-4 pb-[2px] opacity-50 hover:opacity-100"
+              src={assets.bell_icon}
+              alt=""
+            />
+          </div>
+          <p className="w-[33.5px] h-[33.5px] bg-[#0032ff] border-[1.5px] border-[#0032ff] hover:border-[#ffffff] text-white rounded-full flex items-center justify-center text-sm cursor-pointer">
             T
           </p>
         </div>
