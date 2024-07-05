@@ -1,21 +1,34 @@
-import Player from "./components/Player";
-import Sidebar from "./components/Sidebar";
-import Display from "./components/Display";
-import { useContext } from "react";
+import DisplayHome from "./components/DisplayHome";
+import DisplayAlbum from "./components/DisplayAlbum";
+import Login from "./components/Login";
+import { useContext, useEffect } from "react";
 import { PlayerContext } from "./context/PlayerContext";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "./auth/firebase";
+import MainLayout from "./components/MainLayout";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const { audioRef, track } = useContext(PlayerContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        console.log("No User");
+        navigate("/login");
+      }
+    });
+  }, []);
 
   return (
-    <div className="h-screen bg-black">
-      <div className="h-[90%] flex">
-        <Sidebar />
-        <Display />
-      </div>
-      <Player />
-      <audio ref={audioRef} src={track.file} preload="auto"></audio>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<DisplayHome />} />
+        <Route path="/album/:id" element={<DisplayAlbum />} />
+      </Route>
+    </Routes>
   );
 };
 
