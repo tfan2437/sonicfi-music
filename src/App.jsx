@@ -1,13 +1,18 @@
 import DisplayHome from "./components/DisplayHome";
 import DisplayAlbum from "./components/DisplayAlbum";
 import Login from "./components/Login";
-import { useContext, useEffect } from "react";
-import { PlayerContext } from "./context/PlayerContext";
+import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "./auth/firebase";
 import MainLayout from "./components/MainLayout";
 import { Routes, Route } from "react-router-dom";
+import {
+  getTracksById,
+  searchByKeyword,
+  getArtistOverviewById,
+} from "./data/spotifyAPI";
+import DisplayArtist from "./components/DisplayArtist";
 
 const App = () => {
   const navigate = useNavigate();
@@ -19,6 +24,9 @@ const App = () => {
         navigate("/login");
       }
     });
+    // getArtistOverviewById("246dkjvS1zLTtiykXe5h60");
+    // getTracksById("7221xIgOnuakPdLqT0F3nP");
+    // searchByKeyword("post malone")
   }, []);
 
   return (
@@ -27,6 +35,7 @@ const App = () => {
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<DisplayHome />} />
         <Route path="/album/:id" element={<DisplayAlbum />} />
+        <Route path="/artist" element={<DisplayArtist />} />
       </Route>
     </Routes>
   );

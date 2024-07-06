@@ -1,16 +1,10 @@
 import Player from "./Player";
 import Sidebar from "./Sidebar";
-import { useContext } from "react";
-import { PlayerContext } from "../context/PlayerContext";
-
-import { Outlet, useLocation } from "react-router-dom";
-
 import { useEffect, useRef } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import { albumsData } from "../assets/assets";
 
 const MainLayout = () => {
-  const { audioRef, track } = useContext(PlayerContext);
-
   const displayRef = useRef();
   const location = useLocation();
   const isAlbum = location.pathname.includes("album");
@@ -37,7 +31,6 @@ const MainLayout = () => {
         </div>
       </div>
       <Player />
-      <audio ref={audioRef} src={track.file} preload="auto"></audio>
     </div>
   );
 };

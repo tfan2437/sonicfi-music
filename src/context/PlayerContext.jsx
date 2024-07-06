@@ -1,6 +1,7 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/assets";
-
+import { options } from "../data/spotifyAPI";
+import { getTracksResult } from "../data/fetchObjects";
 export const PlayerContext = createContext();
 
 const PlayerContextProvider = (props) => {
@@ -8,7 +9,7 @@ const PlayerContextProvider = (props) => {
   const seekBg = useRef();
   const seekBar = useRef();
 
-  const [track, setTrack] = useState(songsData[2]);
+  const [track, setTrack] = useState(getTracksResult.tracks[0]);
   const [playStatus, setPlayStatus] = useState(false);
   const [time, setTime] = useState({
     currentTime: {
@@ -21,20 +22,14 @@ const PlayerContextProvider = (props) => {
     },
   });
 
-  const play = () => {
-    audioRef.current.play();
-    setPlayStatus(true);
-  };
-
-  const pause = () => {
-    audioRef.current.pause();
-    setPlayStatus(false);
-  };
-
-  const playWithId = async (id) => {
-    await setTrack(songsData[id]);
+  const play = async () => {
     await audioRef.current.play();
     setPlayStatus(true);
+  };
+
+  const pause = async () => {
+    await audioRef.current.pause();
+    setPlayStatus(false);
   };
 
   const previous = async () => {
@@ -59,13 +54,47 @@ const PlayerContextProvider = (props) => {
       audioRef.current.duration;
   };
 
+  // Time Format Function
+  const toTwoDigit = (n) => {
+    return n < 10 ? `0${n}` : n.toString();
+  };
+
+  const formatTime = (time) => {
+    if (isNaN(time.minute) || isNaN(time.second)) {
+      return "00:00";
+    }
+    return `${toTwoDigit(time.minute)}:${toTwoDigit(time.second)}`;
+  };
+
+  // Spotify API Fetching
+  const getTrackPreviewById = async (id) => {
+    try {
+      const response = await fetch(
+        `https://spotify23.p.rapidapi.com/tracks/?ids=${id}`,
+        options
+      );
+      if (!response.ok) {
+        throw new Error("Could not fetch the track data.");
+      }
+      const result = await response.json();
+      setTrack(result.tracks[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    play();
+  }, [track]);
+
   useEffect(() => {
     setTimeout(() => {
       audioRef.current.ontimeupdate = () => {
         seekBar.current.style.width =
-          Math.floor(
-            (audioRef.current.currentTime / audioRef.current.duration) * 100
-          ) + "%";
+          (
+            (audioRef.current.currentTime / audioRef.current.duration) *
+            100
+          ).toFixed(1) + "%";
         setTime({
           currentTime: {
             second: Math.floor(audioRef.current.currentTime % 60),
@@ -76,6 +105,11 @@ const PlayerContextProvider = (props) => {
             minute: Math.floor(audioRef.current.duration / 60),
           },
         });
+
+        if (audioRef.current.currentTime === audioRef.current.duration) {
+          console.log("audio is over");
+          setPlayStatus(false);
+        }
       };
     }, 1000);
   }, [audioRef]);
@@ -92,10 +126,11 @@ const PlayerContextProvider = (props) => {
     setTime,
     play,
     pause,
-    playWithId,
     previous,
     next,
     seekSong,
+    getTrackPreviewById,
+    formatTime,
   };
 
   return (
