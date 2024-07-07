@@ -1,11 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { useContext, useEffect, useRef } from "react";
+import { PlayerContext } from "../context/PlayerContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const navRef = useRef();
+  const { displayRef } = useContext(PlayerContext);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (displayRef.current.scrollTop >= 200) {
+        navRef.current.classList.add("bg-[#000000b0]");
+      } else {
+        navRef.current.classList.remove("bg-[#000000b0]");
+      }
+    };
+
+    const displayElement = displayRef.current;
+    displayElement.addEventListener("scroll", handleScroll);
+
+    return () => {
+      displayElement.removeEventListener("scroll", handleScroll);
+    };
+  }, [displayRef]);
 
   return (
-    <>
+    <div
+      ref={navRef}
+      className="fixed top-0 z-10 w-[100%] lg:w-[77%] py-4 px-4 transition-colors duration-300 ease-out"
+    >
       <div className="w-full flex justify-between items-center font-semibold">
         <div className="flex items-center gap-2">
           <img
@@ -37,16 +61,7 @@ const Navbar = () => {
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-2 mt-4">
-        <p className="bg-white text-black px-4 py-1 rounded-2xl cursor-pointer">
-          All
-        </p>
-        <p className="bg-black px-4 py-1 rounded-2xl cursor-pointer">Music</p>
-        <p className="bg-black px-4 py-1 rounded-2xl cursor-pointer">
-          Podcasts
-        </p>
-      </div>
-    </>
+    </div>
   );
 };
 

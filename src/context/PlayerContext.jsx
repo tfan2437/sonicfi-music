@@ -8,6 +8,7 @@ const PlayerContextProvider = (props) => {
   const audioRef = useRef();
   const seekBg = useRef();
   const seekBar = useRef();
+  const displayRef = useRef();
 
   const [track, setTrack] = useState(getTracksResult.tracks[0]);
   const [playStatus, setPlayStatus] = useState(false);
@@ -66,6 +67,33 @@ const PlayerContextProvider = (props) => {
     return `${toTwoDigit(time.minute)}:${toTwoDigit(time.second)}`;
   };
 
+  // Format Text
+
+  const formatText = (apiText) => {
+    const characterMap = {
+      "&#34;": '"',
+      "&#39;": "'",
+      "&amp;": "&",
+    };
+
+    let cleanedText = apiText;
+
+    // Replace HTML character codes with their corresponding characters
+    for (const [charCode, char] of Object.entries(characterMap)) {
+      const regex = new RegExp(charCode, "g");
+      cleanedText = cleanedText.replace(regex, char);
+    }
+
+    // Format the text with proper punctuation and line breaks
+    cleanedText = cleanedText.replace(/(?:\r\n|\r|\n)/g, " "); // Remove any existing line breaks
+    cleanedText = cleanedText.replace(/(?<=\.|,|;|\?|\!)\s+/g, " "); // Ensure single spaces after punctuation
+    cleanedText = cleanedText.replace(/\s*([.?!])\s*/g, "$1 "); // Ensure single space after punctuation
+    cleanedText = cleanedText.replace(/\s+/g, " "); // Replace multiple spaces with a single space
+    cleanedText = cleanedText.trim(); // Remove any leading or trailing whitespace
+
+    return cleanedText;
+  };
+
   // Spotify API Fetching
   const getTrackPreviewById = async (id) => {
     try {
@@ -116,6 +144,7 @@ const PlayerContextProvider = (props) => {
 
   const contextValue = {
     audioRef,
+    displayRef,
     seekBar,
     seekBg,
     track,
@@ -131,6 +160,7 @@ const PlayerContextProvider = (props) => {
     seekSong,
     getTrackPreviewById,
     formatTime,
+    formatText,
   };
 
   return (

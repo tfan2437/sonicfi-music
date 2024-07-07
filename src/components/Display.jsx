@@ -4,6 +4,7 @@ import DisplayAlbum from "./DisplayAlbum";
 import { useEffect, useRef } from "react";
 import { albumsData } from "../assets/assets";
 import Login from "./Login";
+import Album from "./Album/Album";
 
 const Display = () => {
   const displayRef = useRef();

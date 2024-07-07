@@ -7,6 +7,9 @@ import next_icon from "./next.png";
 import play_icon from "./play.png";
 import pause_icon from "./pause.png";
 import plays_icon from "./plays.png";
+
+import play_black_icon from "./icon-play-black.png";
+
 import prev_icon from "./prev.png";
 import search_icon from "./search.png";
 import shuffle_icon from "./shuffle.png";
@@ -42,6 +45,11 @@ import song1 from "./song1.mp3";
 import song2 from "./song2.mp3";
 import song3 from "./song3.mp3";
 
+import facebook from "./icon-socialmedia-facebook.png";
+import instagram from "./icon-socialmedia-instagram.png";
+import x from "./icon-socialmedia-x.png";
+import wikipedia from "./icon-socialmedia-wikipedia.png";
+
 export const assets = {
   bell_icon,
   home_icon,
@@ -67,6 +75,11 @@ export const assets = {
   arrow_right,
   spotify_logo,
   clock_icon,
+  facebook,
+  instagram,
+  x,
+  wikipedia,
+  play_black_icon,
 };
 
 export const albumsData = [

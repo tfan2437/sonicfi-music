@@ -1,11 +1,14 @@
 import Player from "./Player";
 import Sidebar from "./Sidebar";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { albumsData } from "../assets/assets";
+import Navbar from "./Navbar";
+import { PlayerContext } from "../context/PlayerContext";
 
 const MainLayout = () => {
-  const displayRef = useRef();
+  const { displayRef } = useContext(PlayerContext);
+
   const location = useLocation();
   const isAlbum = location.pathname.includes("album");
   const albumId = isAlbum ? location.pathname.slice(-1) : "";
@@ -25,8 +28,9 @@ const MainLayout = () => {
         <Sidebar />
         <div
           ref={displayRef}
-          className="w-[100%] m-2 px-6 pt-4 rounded bg-[#121212] text-white overflow-auto lg:w-[75%] lg:ml-0"
+          className="w-[100%] lg:w-[85%] bg-[#000000] text-white overflow-auto"
         >
+          <Navbar />
           <Outlet />
         </div>
       </div>

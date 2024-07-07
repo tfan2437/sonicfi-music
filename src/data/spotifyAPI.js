@@ -24,6 +24,50 @@ export const getTracksById = async (id) => {
   }
 };
 
+export const getAlbumById = async (id) => {
+  try {
+    const response = await fetch(
+      `https://spotify23.p.rapidapi.com/albums/?ids=${id}`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error("Could not fetch the album data.");
+    }
+
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAlbumMetaDataById = async (id) => {
+  try {
+    const response = await fetch(
+      `https://spotify23.p.rapidapi.com/album_metadata/?id=${id}`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error("Could not fetch the album data.");
+    }
+
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+try {
+  const response = await fetch(url, options);
+  const result = await response.text();
+  console.log(result);
+} catch (error) {
+  console.error(error);
+}
+
 export const searchByKeyword = async (keyword) => {
   try {
     const response = await fetch(
