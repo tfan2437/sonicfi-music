@@ -105,6 +105,7 @@ const PlayerContextProvider = (props) => {
         throw new Error("Could not fetch the track data.");
       }
       const result = await response.json();
+      console.log(result);
       setTrack(result.tracks[0]);
     } catch (error) {
       console.error(error);

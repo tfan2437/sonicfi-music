@@ -66,7 +66,6 @@ const DisplayArtist = () => {
           <b className="mr-4 text-[#a7a7a7] font-bold w-[30px] inline-flex justify-center">
             #
           </b>
-          <div className="w-14 mr-5"></div>
           Title
         </p>
         <div className="w-[150px] hidden md:block">

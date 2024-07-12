@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { PlayerContext } from "../context/PlayerContext";
 
 const VolumeControl = () => {
-  const [volume, setVolume] = useState(70);
+  const [volume, setVolume] = useState(20);
   const { audioRef } = useContext(PlayerContext);
 
   useEffect(() => {

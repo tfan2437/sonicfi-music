@@ -23,6 +23,7 @@ const Login = () => {
       if (user) {
         console.log("Logged In");
         navigate("/");
+        window.location.reload();
       }
     });
   }, []);

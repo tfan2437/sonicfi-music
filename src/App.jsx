@@ -13,12 +13,16 @@ import {
   getArtistOverviewById,
   getAlbumById,
   getAlbumMetaDataById,
+  trackRecommendationsByGenres,
 } from "./data/spotifyAPI";
 import DisplayArtist from "./components/DisplayArtist";
 import Album from "./components/Album/Album";
+import DisplayRecommendations from "./components/Recommendations/DisplayRecommendations";
 
 const App = () => {
   const navigate = useNavigate();
+
+  const genres = ["pop", "hip-hop", "rock", "country", "r&b", "k-pop"];
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -28,10 +32,12 @@ const App = () => {
       }
     });
 
+    // trackRecommendationsByGenres();
+    // browseAll();
     // getAlbumMetaDataById("1F9LY06gadScF4g3g3BrDC");
     // getAlbumById("1F9LY06gadScF4g3g3BrDC");
-    // getArtistOverviewById("246dkjvS1zLTtiykXe5h60");
-    // getTracksById("7221xIgOnuakPdLqT0F3nP");
+    // getArtistOverviewById("0Y5tJX1MQlPlqiwlOH1tJY");
+    // getTracksById("3SdFuYwyWoq7kuaHdTDcyD");
     // searchByKeyword("post malone")
   }, []);
 
@@ -43,6 +49,7 @@ const App = () => {
         <Route path="/album/:id" element={<DisplayAlbum />} />
         <Route path="/artist" element={<DisplayArtist />} />
         <Route path="/test" element={<Album />} />
+        <Route path="/recommendations" element={<DisplayRecommendations />} />
       </Route>
     </Routes>
   );

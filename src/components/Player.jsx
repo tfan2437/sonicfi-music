@@ -27,6 +27,7 @@ const Player = () => {
   return (
     <div className="h-[10%] bg-black">
       <div className="flex items-center gap-5">
+        {/* Player Progress Bar */}
         <div
           onClick={seekSong}
           ref={seekBg}
@@ -34,9 +35,10 @@ const Player = () => {
         >
           <hr
             ref={seekBar}
-            className="h-1 border-none w-0 bg-[#ffffff] rounded-full"
+            className="h-1 border-none w-0 bg-[#0032ff] rounded-full"
           />
         </div>
+        {/* Player Progress Bar */}
       </div>
       <div className="h-full bg-black flex justify-between items-center text-white px-4">
         <div className="hidden lg:flex items-center gap-4">

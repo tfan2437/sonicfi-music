@@ -34,45 +34,48 @@ const ArtistAlbums = () => {
           </div>
           <div>
             <hr className="opacity-50 mr-12" />
-            <div className="flex justify-between mr-12 items-center">
-              <p className="text-[#aaaaaa] text-[20px] font-semibold">
-                Follow On:
-              </p>
-              <div className="flex gap-3 mt-2">
-                <a
-                  href={artistInfo.profile.externalLinks.items[0].url}
-                  target="_blank"
-                >
-                  <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
-                    <img src={assets.facebook} alt="" className="w-5" />
-                  </div>
-                </a>
-                <a
-                  href={artistInfo.profile.externalLinks.items[1].url}
-                  target="_blank"
-                >
-                  <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
-                    <img src={assets.instagram} alt="" className="w-[18px]" />
-                  </div>
-                </a>
-                <a
-                  href={artistInfo.profile.externalLinks.items[2].url}
-                  target="_blank"
-                >
-                  <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
-                    <img src={assets.x} alt="" className="w-4" />
-                  </div>
-                </a>
-                <a
-                  href={artistInfo.profile.externalLinks.items[3].url}
-                  target="_blank"
-                >
-                  <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
-                    <img src={assets.wikipedia} alt="" className="w-[18px]" />
-                  </div>
-                </a>
+
+            {artistInfo.profile.externalLinks.items.length !== 0 && (
+              <div className="flex justify-between mr-12 items-center">
+                <p className="text-[#aaaaaa] text-[20px] font-semibold">
+                  Follow On:
+                </p>
+                <div className="flex gap-3 mt-2">
+                  <a
+                    href={artistInfo.profile.externalLinks.items[0]?.url}
+                    target="_blank"
+                  >
+                    <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
+                      <img src={assets.facebook} alt="" className="w-5" />
+                    </div>
+                  </a>
+                  <a
+                    href={artistInfo.profile.externalLinks.items[1]?.url}
+                    target="_blank"
+                  >
+                    <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
+                      <img src={assets.instagram} alt="" className="w-[18px]" />
+                    </div>
+                  </a>
+                  <a
+                    href={artistInfo.profile.externalLinks.items[2]?.url}
+                    target="_blank"
+                  >
+                    <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
+                      <img src={assets.x} alt="" className="w-4" />
+                    </div>
+                  </a>
+                  <a
+                    href={artistInfo.profile.externalLinks.items[3]?.url}
+                    target="_blank"
+                  >
+                    <div className="w-8 h-8 bg-[#aaaaaa] hover:bg-[#ffffff] rounded-full flex justify-center items-center ">
+                      <img src={assets.wikipedia} alt="" className="w-[18px]" />
+                    </div>
+                  </a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

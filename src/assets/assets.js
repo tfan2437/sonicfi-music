@@ -14,9 +14,9 @@ import prev_icon from "./prev.png";
 import search_icon from "./search.png";
 import shuffle_icon from "./shuffle.png";
 import speaker_icon from "./speaker.png";
-import stack_icon from "./stack.png";
+
 import zoom_icon from "./zoom.png";
-import plus_icon from "./plus.png";
+
 import arrow_icon from "./arrow.png";
 import mini_player_icon from "./mini-player.png";
 import queue_icon from "./queue.png";
@@ -49,6 +49,14 @@ import facebook from "./icon-socialmedia-facebook.png";
 import instagram from "./icon-socialmedia-instagram.png";
 import x from "./icon-socialmedia-x.png";
 import wikipedia from "./icon-socialmedia-wikipedia.png";
+import home from "./icon-home.png";
+import search from "./icon-search.png";
+import logout from "./icon-logout.png";
+import logoBlue from "./streamfi-logo-blue.png";
+import logoWhite from "./streamfi-logo-white.png";
+import playlist from "./icon-playlist.png";
+import plus from "./icon-plus.png";
+import plusBlue from "./icon-plus-blue.png";
 
 export const assets = {
   bell_icon,
@@ -63,9 +71,7 @@ export const assets = {
   search_icon,
   shuffle_icon,
   speaker_icon,
-  stack_icon,
   zoom_icon,
-  plus_icon,
   arrow_icon,
   mini_player_icon,
   volume_icon,
@@ -75,11 +81,20 @@ export const assets = {
   arrow_right,
   spotify_logo,
   clock_icon,
+  // breakpoint*****,
   facebook,
   instagram,
   x,
   wikipedia,
   play_black_icon,
+  home,
+  search,
+  logout,
+  logoBlue,
+  logoWhite,
+  playlist,
+  plus,
+  plusBlue,
 };
 
 export const albumsData = [

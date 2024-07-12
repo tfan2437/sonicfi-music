@@ -11,3 +11,7 @@ export const formatMinutesAndSeconds = (totalMilliseconds) => {
   const seconds = totalSeconds % 60;
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 };
+
+export const formatArtistsName = (artists) => {
+  return artists.map((artist) => artist.name).join(", ");
+};
