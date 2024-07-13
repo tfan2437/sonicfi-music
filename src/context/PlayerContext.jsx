@@ -2,15 +2,17 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/assets";
 import { options } from "../data/spotifyAPI";
 import { getTracksResult } from "../data/fetchObjects";
+import { getArtistOverview } from "../data/artistOverview";
 export const PlayerContext = createContext();
 
-const PlayerContextProvider = (props) => {
+const PlayerContextProvider = ({ children }) => {
   const audioRef = useRef();
   const seekBg = useRef();
   const seekBar = useRef();
   const displayRef = useRef();
 
   const [track, setTrack] = useState(getTracksResult.tracks[0]);
+  const [artist, setArtist] = useState(getArtistOverview);
   const [playStatus, setPlayStatus] = useState(false);
   const [time, setTime] = useState({
     currentTime: {
@@ -67,33 +69,6 @@ const PlayerContextProvider = (props) => {
     return `${toTwoDigit(time.minute)}:${toTwoDigit(time.second)}`;
   };
 
-  // Format Text
-
-  const formatText = (apiText) => {
-    const characterMap = {
-      "&#34;": '"',
-      "&#39;": "'",
-      "&amp;": "&",
-    };
-
-    let cleanedText = apiText;
-
-    // Replace HTML character codes with their corresponding characters
-    for (const [charCode, char] of Object.entries(characterMap)) {
-      const regex = new RegExp(charCode, "g");
-      cleanedText = cleanedText.replace(regex, char);
-    }
-
-    // Format the text with proper punctuation and line breaks
-    cleanedText = cleanedText.replace(/(?:\r\n|\r|\n)/g, " "); // Remove any existing line breaks
-    cleanedText = cleanedText.replace(/(?<=\.|,|;|\?|\!)\s+/g, " "); // Ensure single spaces after punctuation
-    cleanedText = cleanedText.replace(/\s*([.?!])\s*/g, "$1 "); // Ensure single space after punctuation
-    cleanedText = cleanedText.replace(/\s+/g, " "); // Replace multiple spaces with a single space
-    cleanedText = cleanedText.trim(); // Remove any leading or trailing whitespace
-
-    return cleanedText;
-  };
-
   // Spotify API Fetching
   const getTrackPreviewById = async (id) => {
     try {
@@ -107,6 +82,25 @@ const PlayerContextProvider = (props) => {
       const result = await response.json();
       console.log(result);
       setTrack(result.tracks[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getArtist = async (id) => {
+    try {
+      const response = await fetch(
+        `https://spotify23.p.rapidapi.com/artist_overview/?id=${id}`,
+        options
+      );
+
+      if (!response.ok) {
+        throw new Error("Could not fetch the track data.");
+      }
+
+      const result = await response.json();
+      console.log(result);
+      setArtist(result);
     } catch (error) {
       console.error(error);
     }
@@ -161,12 +155,14 @@ const PlayerContextProvider = (props) => {
     seekSong,
     getTrackPreviewById,
     formatTime,
-    formatText,
+    getArtist,
+    artist,
+    setArtist,
   };
 
   return (
     <PlayerContext.Provider value={contextValue}>
-      {props.children}
+      {children}
     </PlayerContext.Provider>
   );
 };

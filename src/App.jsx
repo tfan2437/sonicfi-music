@@ -10,12 +10,12 @@ import { Routes, Route } from "react-router-dom";
 import {
   getTracksById,
   searchByKeyword,
-  getArtistOverviewById,
+  getArtist,
   getAlbumById,
   getAlbumMetaDataById,
   trackRecommendationsByGenres,
 } from "./data/spotifyAPI";
-import DisplayArtist from "./components/DisplayArtist";
+import DisplayArtist from "./components/Artist/DisplayArtist";
 import Album from "./components/Album/Album";
 import DisplayRecommendations from "./components/Recommendations/DisplayRecommendations";
 
@@ -32,11 +32,13 @@ const App = () => {
       }
     });
 
+    // getArtist("74KM79TiuVKeVCqs8QtB0B");
+
     // trackRecommendationsByGenres();
     // browseAll();
     // getAlbumMetaDataById("1F9LY06gadScF4g3g3BrDC");
     // getAlbumById("1F9LY06gadScF4g3g3BrDC");
-    // getArtistOverviewById("0Y5tJX1MQlPlqiwlOH1tJY");
+
     // getTracksById("3SdFuYwyWoq7kuaHdTDcyD");
     // searchByKeyword("post malone")
   }, []);
@@ -50,6 +52,8 @@ const App = () => {
         <Route path="/artist" element={<DisplayArtist />} />
         <Route path="/test" element={<Album />} />
         <Route path="/recommendations" element={<DisplayRecommendations />} />
+
+        <Route path="/artist/:id" element={<DisplayArtist />} />
       </Route>
     </Routes>
   );

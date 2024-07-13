@@ -1,53 +1,27 @@
-import { useContext } from "react";
-import { getArtistOverview } from "../data/artistOverview";
-import { PlayerContext } from "../context/PlayerContext";
-import { options } from "../data/spotifyAPI";
-import { albumsData, assets, songsData } from "../assets/assets";
-import playIcon from "../assets/icon-play-black.png";
-import ArtistAlbums from "./Artist/ArtistAlbums";
-import ArtistBio from "./Artist/ArtistBio";
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { PlayerContext } from "../../context/PlayerContext";
+import { assets } from "../../assets/assets";
+import { formatPlayCount, formatMinutesAndSeconds } from "../../utils/format";
+
+import ArtistAlbums from "./ArtistAlbums";
+import ArtistBio from "./ArtistBio";
 
 const DisplayArtist = () => {
-  const { getTrackPreviewById } = useContext(PlayerContext);
+  const { id } = useParams();
+  const { getTrackPreviewById, getArtist, artist } = useContext(PlayerContext);
 
-  const formatPlayCount = (count) => {
-    const number = Number(count);
-    return new Intl.NumberFormat().format(number);
-  };
+  useEffect(() => {
+    getArtist(id);
+  }, []);
 
-  const convertToMinutesAndSeconds = (totalMilliseconds) => {
-    const totalSeconds = Math.floor(totalMilliseconds / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
-
-  const artistId = getArtistOverview.data.artist.id;
-  const artistName = getArtistOverview.data.artist.profile.name;
-  const artistBiography = getArtistOverview.data.artist.profile.biography.text;
-  const artistProfileImage =
-    getArtistOverview.data.artist.visuals.avatarImage.sources[0].url;
-  const artistHeaderImage =
-    getArtistOverview.data.artist.visuals.headerImage.sources[0].url;
-
-  const artistTopTracks =
-    getArtistOverview.data.artist.discography.topTracks.items;
-  getArtistOverview.data.artist.discography.topTracks.items[0].track.id;
-  // pass the id to gettrackbyid
-  getArtistOverview.data.artist.discography.topTracks.items[0].track.name;
-  getArtistOverview.data.artist.discography.topTracks.items[0].track.playcount;
-  getArtistOverview.data.artist.discography.topTracks.items[0].track.duration
-    .totalMilliseconds;
-
-  getArtistOverview.data.artist.discography.topTracks.items[0].track.album
-    .coverArt.sources[0].url;
-
-  getArtistOverview.data.artist.discography.popularReleases.items[0].releases
-    .items[0].coverArt.sources[0].url;
+  const artistData = artist.data.artist;
+  const artistHeaderImage = artistData.visuals.headerImage.sources[0].url;
+  const artistName = artistData.profile.name;
+  const artistTopTracks = artistData.discography.topTracks.items;
 
   return (
     <div className="w-full h-full">
-      {/* <img src={artistProfileImage} alt="" className="w-[100px] rounded-full" /> */}
       <div className="relative">
         <img
           src={artistHeaderImage}
@@ -57,7 +31,7 @@ const DisplayArtist = () => {
         <div className="absolute bottom-0 left-4 w-[100%] flex items-center justify-between">
           <p className="text-white font-black text-[70px]">{artistName}</p>
           <div className="mr-8 bg-[#0032ff] rounded-full w-16 h-16 flex justify-center items-center cursor-pointer hover:opacity-75">
-            <img src={playIcon} alt="" className="w-5" />
+            <img src={assets.playBlack} alt="" className="w-5" />
           </div>
         </div>
       </div>
@@ -104,7 +78,7 @@ const DisplayArtist = () => {
           </div>
 
           <p className="text-[15px] text-right pr-6 hidden md:block">
-            {convertToMinutesAndSeconds(item.track.duration.totalMilliseconds)}
+            {formatMinutesAndSeconds(item.track.duration.totalMilliseconds)}
           </p>
         </div>
       ))}

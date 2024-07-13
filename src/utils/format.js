@@ -15,3 +15,27 @@ export const formatMinutesAndSeconds = (totalMilliseconds) => {
 export const formatArtistsName = (artists) => {
   return artists.map((artist) => artist.name).join(", ");
 };
+
+export const formatBioText = (bioText) => {
+  const characterMap = {
+    "&#34;": '"',
+    "&#39;": "'",
+    "&amp;": "&",
+  };
+
+  let cleanedText = bioText;
+  for (const [charCode, char] of Object.entries(characterMap)) {
+    const regex = new RegExp(charCode, "g");
+    cleanedText = cleanedText.replace(regex, char);
+  }
+
+  // Format the text with proper punctuation and line breaks
+  cleanedText = cleanedText.replace(/(?:\r\n|\r|\n)/g, " "); // Remove any existing line breaks
+  cleanedText = cleanedText.replace(/(?<=\.|,|;|\?|\!)\s+/g, " "); // Ensure single spaces after punctuation
+  cleanedText = cleanedText.replace(/\s*([.?!])\s*/g, "$1 "); // Ensure single space after punctuation
+  cleanedText = cleanedText.replace(/\s+/g, " "); // Replace multiple spaces with a single space
+  cleanedText = cleanedText.replace(/<a[^>]*>([^<]*)<\/a>/g, "$1"); // Replace <a> tag
+  cleanedText = cleanedText.trim(); // Remove any leading or trailing whitespace
+
+  return cleanedText;
+};

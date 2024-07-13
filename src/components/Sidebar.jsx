@@ -4,11 +4,15 @@ import { logout } from "../auth/firebase";
 
 const Sidebar = () => {
   return (
-    <div className="w-[25%] h-full hidden lg:flex flex-col p-2 text-white overflow-hidden">
+    <div className="w-[20%] h-full hidden lg:flex flex-col p-2 text-white overflow-hidden">
       <div className="bg-black h-auto flex flex-col gap-6 pb-6">
         <NavLink to={"/"}>
-          <div className="pt-3 pb-4 pl-6">
-            <img src={assets.logoBlue} alt="" className="h-6 w-auto 2xl:h-10" />
+          <div className="pt-3 pl-6 pb-2">
+            <img
+              src={assets.logoBlue}
+              alt=""
+              className="h-6 w-auto 2xl:h-8 threeXL:h-9"
+            />
           </div>
         </NavLink>
 

@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { getArtistOverview } from "../../data/artistOverview";
+import { useContext, useState } from "react";
+import { PlayerContext } from "../../context/PlayerContext";
 
 const ArtistBio = () => {
+  const { artist } = useContext(PlayerContext);
   const [showAll, setShowAll] = useState(false);
-  const albums = getArtistOverview.data.artist.discography.albums.items;
-  const singles = getArtistOverview.data.artist.discography.singles.items;
+  const artistDiscography = artist.data.artist.discography;
+  const albums = artistDiscography.albums.items;
+  const singles = artistDiscography.singles.items;
   const AlbumsAndSingles = [...albums, ...singles];
 
   AlbumsAndSingles.sort((a, b) => {

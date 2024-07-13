@@ -8,8 +8,6 @@ import play_icon from "./play.png";
 import pause_icon from "./pause.png";
 import plays_icon from "./plays.png";
 
-import play_black_icon from "./icon-play-black.png";
-
 import prev_icon from "./prev.png";
 import search_icon from "./search.png";
 import shuffle_icon from "./shuffle.png";
@@ -57,6 +55,7 @@ import logoWhite from "./streamfi-logo-white.png";
 import playlist from "./icon-playlist.png";
 import plus from "./icon-plus.png";
 import plusBlue from "./icon-plus-blue.png";
+import playBlack from "./icon-play-black.png";
 
 export const assets = {
   bell_icon,
@@ -86,7 +85,7 @@ export const assets = {
   instagram,
   x,
   wikipedia,
-  play_black_icon,
+  playBlack,
   home,
   search,
   logout,

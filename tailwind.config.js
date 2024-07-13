@@ -17,6 +17,9 @@ export default {
         lightD: "#dddddd",
         lightE: "#eeeeee",
       },
+      screens: {
+        threeXL: "1850px",
+      },
     },
   },
   plugins: [],

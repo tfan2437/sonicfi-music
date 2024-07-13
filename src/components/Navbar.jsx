@@ -11,9 +11,9 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (displayRef.current.scrollTop >= 200) {
-        navRef.current.classList.add("bg-[#000000b0]");
+        navRef.current.classList.add("bg-[#000000c1]");
       } else {
-        navRef.current.classList.remove("bg-[#000000b0]");
+        navRef.current.classList.remove("bg-[#000000c1]");
       }
     };
 
@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <div
       ref={navRef}
-      className="fixed top-0 z-10 w-[100%] lg:w-[77%] py-4 px-4 transition-colors duration-300 ease-out"
+      className="fixed top-0 z-10 w-[100%] lg:w-[81%] py-4 px-4 transition-colors duration-300 ease-out"
     >
       <div className="w-full flex justify-between items-center font-semibold">
         <div className="flex items-center gap-2">
