@@ -1,6 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/assets";
-import { options } from "../data/spotifyAPI";
+import { options } from "../utils/spotifyAPI";
 import { getTracksResult } from "../data/fetchObjects";
 import { artistPlaceholder } from "../data/placeholder";
 export const PlayerContext = createContext();
@@ -80,7 +80,6 @@ const PlayerContextProvider = ({ children }) => {
         throw new Error("Could not fetch the track data.");
       }
       const result = await response.json();
-      console.log(result);
       setTrack(result.tracks[0]);
     } catch (error) {
       console.error(error);
@@ -99,8 +98,25 @@ const PlayerContextProvider = ({ children }) => {
       }
 
       const result = await response.json();
-      console.log(result);
       setArtist(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getTracksByGenre = async (totalTracks, trackId, artistId, genre) => {
+    try {
+      const response = await fetch(
+        `https://spotify23.p.rapidapi.com/recommendations/?limit=${totalTracks}&seed_tracks=${trackId}&seed_artists=${artistId}&seed_genres=${genre}`,
+        options
+      );
+
+      if (!response.ok) {
+        throw new Error("Could not fetch the track data.");
+      }
+
+      const result = await response.json();
+      return result;
     } catch (error) {
       console.error(error);
     }
@@ -158,6 +174,7 @@ const PlayerContextProvider = ({ children }) => {
     getArtist,
     artist,
     setArtist,
+    getTracksByGenre,
   };
 
   return (

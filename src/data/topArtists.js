@@ -256,7 +256,7 @@ export const topArtists = [
 
     playlists: [
       {
-        id: "spotify:playlist:1DHhWaAzOTvZEG5vDHbHOD",
+        id: "1DHhWaAzOTvZEG5vDHbHOD",
         name: "David Guetta - Top Hits",
         description:
           "All the hits in one playlist : &quot;I'm Good (feat. Bebe Rexha)&quot;, &quot;Baby Don't Hurt Me&quot;, &quot;Crazy What Love Can Do (feat. Becky Hill &amp; Ella Henderson)&quot;, 'Let's Love (feat. Sia)&quot;, &quot;Memories (feat Kid Cudi)&quot;, &quot;Say My Name (feat. Bebe Rexha, J Balvin)&quot;, &quot;Titanium (feat. Sia)&quot;, &quot;Without You (feat. Usher)&quot;...",
@@ -265,7 +265,7 @@ export const topArtists = [
           "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ed142b8d283c9dffbb5c7553",
       },
       {
-        id: "spotify:playlist:6JmDI2ZF7fl93qZzI72bI3",
+        id: "6JmDI2ZF7fl93qZzI72bI3",
         name: "David Guetta - The Hits ('I Don't Wanna Wait' and more!)",
         description:
           "Get ready for the weekend with David Guetta and his biggest hits, all in one place! Featuring I Don't Wanna Wait, I'm Good (Blue), Baby Don't Hurt Me and more.",
@@ -274,7 +274,7 @@ export const topArtists = [
           "https://i2o.scdn.co/image/ab67706c0000cfa37d44d5603be7ac9bf97f01a9",
       },
       {
-        id: "spotify:playlist:6MkLRE2XRC1FiEghfzzNme",
+        id: "6MkLRE2XRC1FiEghfzzNme",
         name: "KILL THE VIBE Coming soon",
         description:
           'Official Playlist by David Guetta &amp; MORTEN. The best collection of Future Rave hits and fresh EDM, Techno, Trance &amp; Melodic Techno for 2023. Updated Weekly! <a href="https://www.youtube.com/watch?v=BXwfirNqQ_U">Watch Future Rave Live @ Brooklyn Mirage 2023</a>',
@@ -282,7 +282,7 @@ export const topArtists = [
           "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da848cd432be494b7747a9d39662",
       },
       {
-        id: "spotify:playlist:1ONoVwmw96EtWKfcdsrVZf",
+        id: "1ONoVwmw96EtWKfcdsrVZf",
         name: "David Guetta Playlist",
         description:
           "This is The David Guetta Playlist – a selection of tracks handpicked by David Guetta and updated weekly.",
@@ -291,18 +291,120 @@ export const topArtists = [
       },
     ],
   },
+  {
+    id: "3TVXtAsR1Inumwj472S9r4",
+    name: "Drake",
+    avatarImage:
+      "https://i.scdn.co/image/ab6761610000e5eb4293385d324db8558179afd9",
+
+    playlists: [
+      {
+        id: "5MTeWDIRll9KvdOSJHXFyH",
+        name: "Drake – Collection",
+        description: "",
+        images:
+          "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84ae89b3bd0d5c80bba630747d",
+      },
+      {
+        id: "3pwaLeLGnDSlsP4OisZ62S",
+        name: "PARTYNEXTDOOR - Collection - P4",
+        description: "PARTYNEXTDOOR - Collection - PND 4 P4 Out Now ",
+        images:
+          "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da846ca0207c1455c55d549707c9",
+      },
+      {
+        id: "2uDJycAxKUWY1m58vX2TTL",
+        name: "DRAKE: IT'S ALL A BLUR  - BIG AS THE WHAT ? (Official Drake Setlist)",
+        description:
+          "IT'S ALL A BLUR:  BIG AS THE WHAT ?UPDATED DRAKE SETLIST MARCH 4, 2024",
+        images:
+          "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c0969a8ae32ba0c3d4c5e314",
+      },
+    ],
+  },
+  {
+    id: "1uNFoZAHBGtllmzznpCI3s",
+    name: "Justin Bieber",
+    avatarImage:
+      "https://i.scdn.co/image/ab6761610000e5eb8ae7f2aaa9817a704a87ea36",
+
+    playlists: [
+      {
+        id: "1eMxaLfIyAU41IVGQJdh9l",
+        name: "Workout with Justin Bieber",
+        description: "stay motivated and healthy. work out to these ones. ",
+        images:
+          "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84f8195e779e5ea9488e78ffa3",
+      },
+      {
+        id: "6WKQdo3KO03cYanX0hTsa4",
+        name: "At Home with Justin Bieber",
+        description: "stay focused and stay home everyone. ",
+        images:
+          "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84f3cc1bfc7304b87bb7ea41de",
+      },
+      {
+        id: "7HxdpF1tOKEAMHN6VrDbQU",
+        name: "Major Feels with Justin Bieber",
+        description: "This one's for you. major feels. ",
+        images:
+          "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8420cdb4ebd58c1f0a21cf74d7",
+      },
+    ],
+  },
+  {
+    id: "0Y5tJX1MQlPlqiwlOH1tJY",
+    name: "Travis Scott",
+    avatarImage:
+      "https://i.scdn.co/image/ab6761610000e5eb19c2790744c792d05570bb71",
+
+    playlists: [
+      {
+        id: "1iLx9sxt1D13OLkvBOfoIE",
+        name: "UTOPIA",
+        description: "UTOPIA is here.",
+        images:
+          "https://i2o.scdn.co/image/ab67706c0000cfa3e5cc4a5ca38d8d808fd431ea",
+      },
+      {
+        id: "6WSUBK7xfb5QcLSLxVHGvQ",
+        name: "Travis Scott: Features",
+        description: "",
+        images:
+          "https://mosaic.scdn.co/640/ab67616d00001e0202854a7060fccc1a66a4b5adab67616d00001e0270dbc9f47669d120ad874ec1ab67616d00001e027429777bb3e217e4bf182212ab67616d00001e02c4fee55d7b51479627c31f89",
+      },
+      {
+        id: "4sB6HPgHCVfXRXZeuWvyFr",
+        name: "CACTUS JACK OFFICIAL PLAYLIST",
+        description: "The Official Playlist of Travis Scott + Cactus Jack",
+        images:
+          "https://mosaic.scdn.co/640/ab67616d00001e024d31eb0cbf82e53266958768ab67616d00001e02881d8d8378cd01099babcd44ab67616d00001e02c800e1a4a237cf8f085183c5ab67616d00001e02ed7aec46f10da07bb4927874",
+      },
+    ],
+  },
+  {
+    id: "2YZyLoL8N0Wb9xBt1NhZWg",
+    name: "Kendrick Lamar",
+    avatarImage:
+      "https://i.scdn.co/image/ab6761610000e5eb437b9e2a82505b3d93ff1022",
+
+    playlists: [
+      {
+        id: "2uXnrfgxtgiXVDsUJN6eJN",
+        name: "Kendrick Lamar – good kid, m.A.A.d city",
+        description:
+          "Kendrick Lamar's highly anticipated debut studio album, 'good kid, m.A.A.d city', is here! Listen to the album with fans from around the world in <a href=\"http://open.soundrop.fm/s/KendrickLamar\">Soundrop</a>, find Kendrick's playlist of his influences <a href=\"http://open.spotify.com/user/kendricklamar/playlist/5yo56SS65wxjls2sHOVWOM\">here</a>, and check out extensive coverage of the album's release at <a href=\"http://www.complex.com/music/2012/10/kendrick-lamar-online-cover-story\">Complex</a>. And check out the bonus track 'The Recipe (Black Hippy Remix)' only on Spotify.",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e02e202e51d849adb761c0c079c",
+      },
+      {
+        id: "0tzjb51AItxK6qLTd1f3Vc",
+        name: "Kendrick Classics feat.",
+        description: "",
+
+        images:
+          "https://mosaic.scdn.co/640/ab67616d00001e0233d50ba80791b4ed381f5221ab67616d00001e026d89f336fbfbdf2089701da0ab67616d00001e02bea486eafb7121e6d10bc1c2ab67616d00001e02d28d2ebdedb220e479743797",
+      },
+    ],
+  },
 ];
-
-// Drake
-
-// Justin Bieber
-
-// Bruno Mars
-
-// Kendrick Lamar
-
-// SZA
-
-// Travis Scott
-
-// Ed Sheeran

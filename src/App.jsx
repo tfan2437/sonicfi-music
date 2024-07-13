@@ -14,7 +14,7 @@ import {
   getAlbumById,
   getAlbumMetaDataById,
   trackRecommendationsByGenres,
-} from "./data/spotifyAPI";
+} from "./utils/spotifyAPI";
 import DisplayArtist from "./components/Artist/DisplayArtist";
 import Album from "./components/Album/Album";
 import DisplayRecommendations from "./components/Recommendations/DisplayRecommendations";
@@ -32,7 +32,7 @@ const App = () => {
       }
     });
 
-    // getArtist("6M2wZ9GZgrQXHCFfjv46we");
+    // getArtist("2YZyLoL8N0Wb9xBt1NhZWg");
 
     // trackRecommendationsByGenres();
     // browseAll();

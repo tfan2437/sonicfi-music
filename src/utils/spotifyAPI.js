@@ -6,10 +6,14 @@ export const options = {
   },
 };
 
-export const trackRecommendationsByGenres = async () => {
+export const trackRecommendationsByGenres = async (
+  trackId,
+  artistId,
+  genre
+) => {
   try {
     const response = await fetch(
-      `https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=3SdFuYwyWoq7kuaHdTDcyD&seed_artists=0Y5tJX1MQlPlqiwlOH1tJY&seed_genres=hip-pop`,
+      `https://spotify23.p.rapidapi.com/recommendations/?limit=25&seed_tracks=${trackId}&seed_artists=${artistId}&seed_genres=${genre}`,
       options
     );
 

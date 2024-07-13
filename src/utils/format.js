@@ -39,3 +39,7 @@ export const formatBioText = (bioText) => {
 
   return cleanedText;
 };
+
+export function randomInt(max) {
+  return Math.floor(Math.random() * max);
+}
