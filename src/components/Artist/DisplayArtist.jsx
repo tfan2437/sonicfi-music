@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PlayerContext } from "../../context/PlayerContext";
 import { assets } from "../../assets/assets";
@@ -10,6 +10,7 @@ import ArtistBio from "./ArtistBio";
 const DisplayArtist = () => {
   const { id } = useParams();
   const { getTrackPreviewById, getArtist, artist } = useContext(PlayerContext);
+  const [hoveredTrackIndex, setHoveredTrackIndex] = useState(null);
 
   useEffect(() => {
     getArtist(id);
@@ -56,13 +57,15 @@ const DisplayArtist = () => {
       <hr className="opacity-25" />
       {artistTopTracks.map((item, index) => (
         <div
-          className="pl-4 grid grid-cols-3 sm:grid-cols-6 gap-2 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff26] cursor-pointer"
+          className="relative pl-4 grid grid-cols-3 sm:grid-cols-6 gap-2 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff26] cursor-pointer"
           key={index}
           onClick={() => getTrackPreviewById(item.track.id)}
+          onMouseEnter={() => setHoveredTrackIndex(index)}
+          onMouseLeave={() => setHoveredTrackIndex(null)}
         >
           <p className="text-white col-span-4 font-semibold text-nowrap">
             <b className="mr-4 text-[#a7a7a7] font-bold w-[30px] inline-flex justify-center">
-              {index + 1}
+              {hoveredTrackIndex === index ? "▶" : index + 1}
             </b>
             <img
               className="inline h-14 mr-5"

@@ -2,7 +2,7 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/assets";
 import { options } from "../data/spotifyAPI";
 import { getTracksResult } from "../data/fetchObjects";
-import { getArtistOverview } from "../data/artistOverview";
+import { artistPlaceholder } from "../data/placeholder";
 export const PlayerContext = createContext();
 
 const PlayerContextProvider = ({ children }) => {
@@ -12,7 +12,7 @@ const PlayerContextProvider = ({ children }) => {
   const displayRef = useRef();
 
   const [track, setTrack] = useState(getTracksResult.tracks[0]);
-  const [artist, setArtist] = useState(getArtistOverview);
+  const [artist, setArtist] = useState(artistPlaceholder);
   const [playStatus, setPlayStatus] = useState(false);
   const [time, setTime] = useState({
     currentTime: {

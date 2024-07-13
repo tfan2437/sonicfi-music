@@ -23,7 +23,7 @@ const Sidebar = () => {
           </div>
         </NavLink>
 
-        <NavLink to={"/artist"}>
+        <NavLink to={"/"}>
           <div className="flex items-center gap-[7px] pl-6 opacity-85 hover:opacity-100">
             <img className="w-6" src={assets.search} alt="" />
             <p className="font-bold text-lg">Search</p>
@@ -40,7 +40,7 @@ const Sidebar = () => {
       </div>
       <div className="bg-[#121212]">
         <div className="flex justify-between items-center">
-          <NavLink to={"/recommendations"}>
+          <NavLink to={"/"}>
             <div className="flex items-center gap-[7px] pl-6 opacity-85 hover:opacity-100">
               <img className="w-[25px] pl-[1px]" src={assets.playlist} alt="" />
               <p className="font-bold text-lg">Library</p>

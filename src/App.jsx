@@ -32,7 +32,7 @@ const App = () => {
       }
     });
 
-    // getArtist("74KM79TiuVKeVCqs8QtB0B");
+    // getArtist("6M2wZ9GZgrQXHCFfjv46we");
 
     // trackRecommendationsByGenres();
     // browseAll();
@@ -47,12 +47,8 @@ const App = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<MainLayout />}>
-        <Route path="/" element={<DisplayHome />} />
-        <Route path="/album/:id" element={<DisplayAlbum />} />
-        <Route path="/artist" element={<DisplayArtist />} />
-        <Route path="/test" element={<Album />} />
-        <Route path="/recommendations" element={<DisplayRecommendations />} />
-
+        <Route path="/" element={<DisplayRecommendations />} />
+        <Route path="/austin" element={<Album />} />
         <Route path="/artist/:id" element={<DisplayArtist />} />
       </Route>
     </Routes>

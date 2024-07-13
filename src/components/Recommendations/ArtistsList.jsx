@@ -18,25 +18,21 @@ const ArtistsList = () => {
           {showMore ? "Show Less" : "Show More"}
         </p>
       </div>
-      <div className="grid grid-cols-7 gap-4 pr-5">
+      <div className="grid grid-cols-7 gap-4 pr-5 gap-y-6">
         {topArtists.map((artist, index) => (
           <div
             key={index}
-            className="col-span-1 text-lightC hover:text-white"
+            className="col-span-1 text-lightC hover:text-white cursor-pointer px-4"
             onClick={() => navigate(`/artist/${artist.id}`)}
           >
-            <div className="cursor-pointer px-4">
-              <img
-                src={artist.avatarImage}
-                alt=""
-                className="w-full h-full rounded-full object-cover opacity-100 hover:opacity-60"
-              />
-              <div className="w-full mt-2">
-                <p className="font-medium text-md text-nowrap overflow-hidden">
-                  {artist.name}
-                </p>
-              </div>
-            </div>
+            <img
+              src={artist.avatarImage}
+              alt=""
+              className="w-full aspect-square rounded-full object-cover opacity-100 hover:opacity-55"
+            />
+            <p className="font-medium text-md text-nowrap overflow-hidden mt-2">
+              {artist.name}
+            </p>
           </div>
         ))}
       </div>
