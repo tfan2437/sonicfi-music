@@ -10,13 +10,13 @@ import {
 import { getFirestore, getDoc, doc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAUS3IN_mtfMQJvW3x944atrkNHpFY4ixE",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "streamfi-music.firebaseapp.com",
   projectId: "streamfi-music",
-  storageBucket: "streamfi-music.appspot.com",
-  messagingSenderId: "418826939168",
-  appId: "1:418826939168:web:2f179702d6205b2c5b0545",
-  measurementId: "G-MQYHLNWR0E",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -25,7 +25,6 @@ const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
 // Authentication Function
-
 const signUp = async (name, email, password) => {
   try {
     const respose = await createUserWithEmailAndPassword(auth, email, password);

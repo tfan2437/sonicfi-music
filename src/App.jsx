@@ -7,7 +7,7 @@ import { auth, db } from "./auth/firebase";
 import MainLayout from "./components/MainLayout";
 import { Routes, Route } from "react-router-dom";
 
-import DisplayArtist from "./components/Artist/DisplayArtist";
+import ArtistPage from "./components/Artist/ArtistPage";
 import Album from "./components/Album/Album";
 import HomePage from "./components/Home/HomePage";
 
@@ -45,8 +45,8 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/austin" element={<Album />} />
-        <Route path="/artist/:id" element={<DisplayArtist />} /> */}
+        <Route path="/austin" element={<Album />} />
+        <Route path="/artist/:id" element={<ArtistPage />} />
       </Route>
     </Routes>
   );

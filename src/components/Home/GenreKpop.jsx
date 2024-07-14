@@ -7,12 +7,6 @@ import { assets } from "../../assets/assets";
 import DropdownMenu from "../DropdownMenu";
 
 const GenreKpop = () => {
-  const { getTracksByGenre, getTrackPreviewById } = useContext(PlayerContext);
-
-  const [showMore, setShowMore] = useState(false);
-  const [tracksData, setTracksData] = useState(genreTracksPlaceholder.tracks);
-  const tracksLess = tracksData.slice(0, 7);
-
   // useEffect(() => {
   //   const genreTracks = async () => {
   //     try {
@@ -38,6 +32,22 @@ const GenreKpop = () => {
   //   genreTracks();
   // }, []);
 
+  const { getTracksByGenre, getTrackPreviewById } = useContext(PlayerContext);
+
+  const [showMore, setShowMore] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [activedIndex, setActivedIndex] = useState(null);
+  const [tracksData, setTracksData] = useState(genreTracksPlaceholder.tracks);
+  const tracksLess = tracksData.slice(0, 7);
+
+  const handleMenu = (index) => {
+    if (activedIndex === index) {
+      setActivedIndex(null);
+    } else {
+      setActivedIndex(index);
+    }
+  };
+
   return (
     <div className="w-full h-auto">
       <div className="w-full flex justify-between items-end mt-2 mb-5">
@@ -52,15 +62,29 @@ const GenreKpop = () => {
       <div className="grid grid-cols-7 gap-4 pr-5 ">
         {(showMore ? tracksData : tracksLess).map((track, index) => (
           <div key={index} className="col-span-1 relative">
-            <DropdownMenu />
             <div
-              className="cursor-pointer group text-lightC hover:text-white"
+              className="absolute top-[4px] right-[4px] z-50 opacity-30 hover:opacity-100 bg-[#00000051] backdrop-blur-xl p-1 rounded-full cursor-pointer"
+              onClick={() => handleMenu(index)}
+            >
+              <img src={assets.more} alt="" className="w-4" />
+            </div>
+            {activedIndex === index ? (
+              <DropdownMenu
+                artistId={track.artists[0].id}
+                albumId={track.album.uri.slice(14, 36)}
+              />
+            ) : (
+              <div></div>
+            )}
+
+            <div
+              className="cursor-pointer text-lightC hover:text-white"
               onClick={() => getTrackPreviewById(track.id)}
             >
               <img
                 src={track.album.images[0].url}
                 alt=""
-                className="w-full aspect-square object-cover rounded-md opacity-100 group-hover:opacity-60"
+                className="w-full aspect-square object-cover rounded-md"
               />
               <div className="w-full">
                 <p className="font-medium text-md text-nowrap overflow-hidden">

@@ -7,7 +7,7 @@ import { formatPlayCount, formatMinutesAndSeconds } from "../../utils/format";
 import ArtistAlbums from "./ArtistAlbums";
 import ArtistBio from "./ArtistBio";
 
-const DisplayArtist = () => {
+const ArtistPage = () => {
   const { id } = useParams();
   const { getTrackPreviewById, getArtist, artist } = useContext(PlayerContext);
   const [hoveredTrackIndex, setHoveredTrackIndex] = useState(null);
@@ -93,4 +93,4 @@ const DisplayArtist = () => {
   );
 };
 
-export default DisplayArtist;
+export default ArtistPage;

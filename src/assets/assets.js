@@ -60,6 +60,7 @@ import microphone from "./icon-microphone.png";
 import album from "./icon-album.png";
 import hand from "./icon-hand.png";
 import artist from "./icon-artist.png";
+import more from "./icon-more-dots.png";
 
 export const assets = {
   bell_icon,
@@ -102,6 +103,7 @@ export const assets = {
   album,
   hand,
   artist,
+  more,
 };
 
 export const albumsData = [
