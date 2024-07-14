@@ -11,6 +11,15 @@ const PlayerContextProvider = ({ children }) => {
   const seekBar = useRef();
   const displayRef = useRef();
 
+  const [currentUser, setCurrentUser] = useState({
+    email: "user@streamfi.com",
+    name: "User",
+    uid: "607DZlOZN1gkV0q3AxEfmGieoeu1",
+    authProvider: "StreamFi",
+    profileImage:
+      "https://lh3.googleusercontent.com/a/ACg8ocK64LPrMsp2AVJSU9q76jiZIaBwlu6iUlTiTi7Fdr01o5Queaxa=s96-c",
+  });
+
   const [track, setTrack] = useState(getTracksResult.tracks[0]);
   const [artist, setArtist] = useState(artistPlaceholder);
   const [playStatus, setPlayStatus] = useState(false);
@@ -26,8 +35,12 @@ const PlayerContextProvider = ({ children }) => {
   });
 
   const play = async () => {
-    await audioRef.current.play();
-    setPlayStatus(true);
+    try {
+      await audioRef.current.play();
+      setPlayStatus(true);
+    } catch (error) {
+      console.error("Playback error:", error);
+    }
   };
 
   const pause = async () => {
@@ -38,16 +51,14 @@ const PlayerContextProvider = ({ children }) => {
   const previous = async () => {
     if (track.id > 0) {
       await setTrack(songsData[track.id - 1]);
-      await audioRef.current.play();
-      setPlayStatus(true);
+      await play();
     }
   };
 
   const next = async () => {
     if (track.id < songsData.length - 1) {
       await setTrack(songsData[track.id + 1]);
-      await audioRef.current.play();
-      setPlayStatus(true);
+      await play();
     }
   };
 
@@ -123,7 +134,10 @@ const PlayerContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    play();
+    const handlePlay = async () => {
+      await play();
+    };
+    handlePlay();
   }, [track]);
 
   useEffect(() => {
@@ -175,6 +189,8 @@ const PlayerContextProvider = ({ children }) => {
     artist,
     setArtist,
     getTracksByGenre,
+    currentUser,
+    setCurrentUser,
   };
 
   return (

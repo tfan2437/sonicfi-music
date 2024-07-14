@@ -2,7 +2,7 @@ import bell_icon from "./icon-bell.png";
 import home_icon from "./home.png";
 import like_icon from "./like.png";
 import loop_icon from "./loop.png";
-import mic_icon from "./mic.png";
+
 import next_icon from "./next.png";
 import play_icon from "./play.png";
 import pause_icon from "./pause.png";
@@ -56,13 +56,17 @@ import playlist from "./icon-playlist.png";
 import plus from "./icon-plus.png";
 import plusBlue from "./icon-plus-blue.png";
 import playBlack from "./icon-play-black.png";
+import microphone from "./icon-microphone.png";
+import album from "./icon-album.png";
+import hand from "./icon-hand.png";
+import artist from "./icon-artist.png";
 
 export const assets = {
   bell_icon,
   home_icon,
   like_icon,
   loop_icon,
-  mic_icon,
+
   next_icon,
   play_icon,
   plays_icon,
@@ -94,6 +98,10 @@ export const assets = {
   playlist,
   plus,
   plusBlue,
+  microphone,
+  album,
+  hand,
+  artist,
 };
 
 export const albumsData = [

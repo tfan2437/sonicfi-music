@@ -1,7 +1,7 @@
 import TopArtists from "./TopArtists";
-import GenreKpop from "./GenreTracks";
+import GenreKpop from "./GenreKpop";
 
-const DisplayRecommendations = () => {
+const HomePage = () => {
   return (
     <div className="w-full h-full pt-[65px]">
       <hr className="opacity-25" />
@@ -15,4 +15,4 @@ const DisplayRecommendations = () => {
   );
 };
 
-export default DisplayRecommendations;
+export default HomePage;

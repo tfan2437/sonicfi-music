@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 import { assets } from "../../assets/assets";
-import { formatMinutesAndSeconds, formatPlayCount } from "../../utils/format";
+import { formatMinutesAndSeconds } from "../../utils/format";
 import { albumResult, albumMetaResult } from "../../data/albumObject";
 import { getArtistOverview } from "../../data/artistOverview";
 

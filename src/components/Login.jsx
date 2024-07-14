@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, login, loginWithGoogle, logout, signup } from "../auth/firebase";
+import { auth, signUp, login, loginWithGoogle } from "../auth/firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import streamFiLogo from "../assets/streamfi-logo-white.png";
@@ -21,29 +21,28 @@ const Login = () => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        console.log("Logged In");
         navigate("/");
-        window.location.reload();
+        // window.location.reload();
       }
     });
   }, []);
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    await signup(username, email, password);
-    console.log("Sign Up Success!");
+    await signUp(username, email, password);
+    console.log("User sign up successfully!");
   };
 
   const handleLogIn = async (e) => {
     e.preventDefault();
     await login(email, password);
-    console.log("Sign In Success!");
+    console.log("User login successfully!");
   };
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     await loginWithGoogle();
-    console.log("Sign In Success!");
+    console.log("Google login successfully!");
   };
 
   const labelClasses = "text-white text-sm font-semibold mb-2 mt-[12px]";

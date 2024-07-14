@@ -96,7 +96,7 @@ const Player = () => {
             </p>
           </div>
 
-          <img className="w-4" src={assets.mic_icon} alt="" />
+          <img className="w-4" src={assets.microphone} alt="" />
           <img className="w-4" src={assets.volume_icon} alt="" />
           <VolumeControl />
           <img className="w-4" src={assets.zoom_icon} alt="" />
