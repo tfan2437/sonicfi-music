@@ -17,9 +17,12 @@ const ArtistPage = () => {
   }, []);
 
   const artistData = artist.data.artist;
-  const artistHeaderImage = artistData.visuals.headerImage.sources[0].url;
   const artistName = artistData.profile.name;
-  const artistTopTracks = artistData.discography.topTracks.items;
+  const artistTopTracks = artistData.discography.topTracks?.items;
+
+  const placeholderImage = assets.blackImage;
+  const artistHeaderImage =
+    artistData.visuals.headerImage?.sources[0]?.url || placeholderImage;
 
   return (
     <div className="w-full h-full">

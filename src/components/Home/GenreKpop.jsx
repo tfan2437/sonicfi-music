@@ -69,10 +69,7 @@ const GenreKpop = () => {
               <img src={assets.more} alt="" className="w-4" />
             </div>
             {activedIndex === index ? (
-              <DropdownMenu
-                artistId={track.artists[0].id}
-                albumId={track.album.uri.slice(14, 36)}
-              />
+              <DropdownMenu track={track} />
             ) : (
               <div></div>
             )}

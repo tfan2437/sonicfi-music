@@ -1,50 +1,49 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
 import { assets } from "../../assets/assets";
 import { formatMinutesAndSeconds } from "../../utils/format";
-import { albumResult, albumMetaResult } from "../../data/albumObject";
-import { getArtistOverview } from "../../data/artistOverview";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Album = () => {
-  const [fullWidth, setFullWidth] = useState(false);
+const AlbumPage = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const {
+    getTrackPreviewById,
+    getAlbum,
+    album,
+    getAlbumMeta,
+    albumMeta,
+    getArtist,
+    artist,
+  } = useContext(PlayerContext);
 
-  const { getTrackPreviewById, setTrack } = useContext(PlayerContext);
+  const albumData = album.albums[0];
+  const albumTracks = album.albums[0].tracks.items;
 
-  const albumData = albumResult.albums[0];
-  const albumTracks = albumResult.albums[0].tracks.items;
-
-  const albumMetadata = albumMetaResult.data.album;
+  const albumMetadata = albumMeta.data.album;
   const albumHexColor =
     albumMetadata.coverArt.extractedColors.colorRaw.hex + "c1";
 
-  albumMetadata.name;
+  useEffect(() => {
+    const updateAlbumPage = async () => {
+      await getAlbum(id);
+      await getAlbumMeta(id);
+    };
 
-  albumData.album_type;
-  albumResult.albums[0].release_date;
+    updateAlbumPage();
+  }, [id]);
 
-  albumResult.albums[0].artists[0].id;
-  albumResult.albums[0].artists[0].name;
+  useEffect(() => {
+    const updateRecentAlbumList = async () => {
+      const albumArtistId = album.albums[0].artists[0].id;
+      await getArtist(albumArtistId);
+    };
 
-  albumResult.albums[0].copyrights[0].text;
-  albumResult.albums[0].label;
+    updateRecentAlbumList();
+  }, [album]);
 
-  albumResult.albums[0].images[0].url;
-
-  // traks url
-
-  albumResult.albums[0].tracks.items; // tracks array
-
-  albumResult.albums[0].tracks.items[0].artists; // artists array
-
-  albumResult.albums[0].tracks.items[0].name; // song name
-  albumResult.albums[0].tracks.items[0].duration_ms; // duration need to format
-  albumResult.albums[0].tracks.items[0].preview_url;
-  albumResult.albums[0].tracks.items[0].id;
-
-  // onClick={() => getTrackPreviewById(item.track.id)}
-
-  const albums = getArtistOverview.data.artist.discography.albums.items;
-  const singles = getArtistOverview.data.artist.discography.singles.items;
+  const albums = artist.data.artist.discography.albums.items;
+  const singles = artist.data.artist.discography.singles.items;
   const albumsAndSingles = [...albums, ...singles];
 
   albumsAndSingles.sort((a, b) => {
@@ -81,10 +80,8 @@ const Album = () => {
             </div>
           </div>
           <div className="flex 2xl:hidden mr-5 mb-[10px] bg-[#ffffff] rounded-full w-16 h-16 justify-center items-center cursor-pointer hover:opacity-75">
-            <img src={assets.play_black_icon} alt="" className="w-5" />
+            <img src={assets.playBlack} alt="" className="w-5" />
           </div>
-
-          <div className="absolute bottom-[-10px] left-5 w-[100%] flex items-center justify-between"></div>
         </div>
         <div className="pl-4 grid grid-cols-3 sm:grid-cols-6 mt-4 mb-2 text-[#7a7a7a] text-sm">
           <p className="col-span-5 inline-flex">
@@ -131,13 +128,16 @@ const Album = () => {
         <hr className="opacity-25" />
       </div>
       <div className="hidden 2xl:flex w-auto h-[100%] flex-col">
-        <div className="flex flex-col w-[400px] bg-[#242424] mx-2 mt-2 rounded-lg">
+        <div
+          className="flex flex-col w-[400px] bg-dark2 hover:bg-[#333333e9] mx-2 mt-2 rounded-lg cursor-pointer"
+          onClick={() => navigate(`/artist/${album.albums[0].artists[0].id}`)}
+        >
           <img
             src={
               albumMetadata.artists.items[0].visuals.avatarImage.sources[0].url
             }
             alt=""
-            className="bg-[#0032ff] w-[380px] h-[290px] mt-12 mx-auto object-cover"
+            className="bg-[#0032ff] w-[380px] h-[290px] mt-14 mx-auto object-cover"
           />
           <div className="mx-3 mt-1 text-[#777]">
             <p className="text-3xl font-bold text-white">
@@ -155,12 +155,13 @@ const Album = () => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col w-[400px] h-auto overflow-hidden bg-[#242424] mx-2 mt-2 rounded-lg text-[#a7a7a7] cursor-pointer">
+        <div className="flex flex-col w-[400px] h-auto overflow-hidden bg-dark2  mx-2 mt-2 rounded-lg text-[#a7a7a7] cursor-pointer">
           <p className="text-white font-bold text-lg mt-2 ml-2">Recent</p>
-          {albumsAndSingles.slice(0, 7).map((album, index) => (
+          {albumsAndSingles.slice(0, 8).map((album, index) => (
             <div
               key={index}
-              className="flex items-center hover:bg-[#ffffff26] px-1 md:px-2 py-1 md:py-2 rounded"
+              className="flex items-center hover:bg-[#333333a1] px-1 md:px-2 py-1 md:py-2 rounded"
+              onClick={() => navigate(`/album/${album.releases.items[0].id}`)}
             >
               <img
                 src={album.releases.items[0].coverArt.sources[0].url}
@@ -185,4 +186,4 @@ const Album = () => {
   );
 };
 
-export default Album;
+export default AlbumPage;

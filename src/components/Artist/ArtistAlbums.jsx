@@ -1,15 +1,17 @@
 import { useContext, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
+import { useNavigate } from "react-router-dom";
 
 const ArtistBio = () => {
+  const navigate = useNavigate();
+
   const { artist } = useContext(PlayerContext);
   const [showAll, setShowAll] = useState(false);
-  const artistDiscography = artist.data.artist.discography;
-  const albums = artistDiscography.albums.items;
-  const singles = artistDiscography.singles.items;
-  const AlbumsAndSingles = [...albums, ...singles];
+  const albums = artist.data.artist.discography.albums.items;
+  const singles = artist.data.artist.discography.singles.items;
+  const albumsAndSingles = [...albums, ...singles];
 
-  AlbumsAndSingles.sort((a, b) => {
+  albumsAndSingles.sort((a, b) => {
     const dateA = new Date(
       a.releases.items[0].date.year,
       a.releases.items[0].date.month - 1
@@ -35,11 +37,12 @@ const ArtistBio = () => {
         </p>
       </div>
       <div className="pl-6 pr-4 grid grid-cols-3 xl:grid-cols-6 gap-1 md:gap-2 items-center text-[#a7a7a7] cursor-pointer pb-4">
-        {(showAll ? AlbumsAndSingles : AlbumsAndSingles.slice(0, 6)).map(
+        {(showAll ? albumsAndSingles : albumsAndSingles.slice(0, 6)).map(
           (album, index) => (
             <div
               key={index}
               className="hover:bg-[#ffffff26] px-1 md:px-2 py-1 md:py-2 rounded"
+              onClick={() => navigate(`/album/${album.releases.items[0].id}`)}
             >
               <img
                 src={album.releases.items[0].coverArt.sources[0].url}

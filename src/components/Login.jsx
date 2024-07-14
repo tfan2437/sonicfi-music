@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import streamFiLogo from "../assets/streamfi-logo-white.png";
 import googleIcon from "../assets/google-g-icon.png";
-import IOSSwitch from "./IOSSwitch";
+import MuiSwitch from "./MuiSwitch";
 import eyeShow from "../assets/icon-password-show.png";
 import eyeHide from "../assets/icon-password-hide.png";
 
@@ -53,10 +53,10 @@ const Login = () => {
         <img src={streamFiLogo} alt="" className="h-[30px] w-auto" />
       </div>
       <div>
-        <div className="flex flex-col w-[350px] md:w-[390px] h-auto bg-black bg-opacity-70 backdrop-filter backdrop-blur-md rounded-lg py-2 px-6 mb-6">
+        <div className="flex flex-col w-[350px] md:w-[390px] h-auto bg-[#000000a1] backdrop-blur-lg rounded-xl py-2 px-6 mb-6">
           <form className="flex flex-col mb-4">
             <p className="text-[28px] text-white font-semibold mt-4 mb-2">
-              {loginPage ? "Log In" : "Sign Up"}
+              {loginPage ? "Login" : "Sign Up"}
             </p>
             {!loginPage && <p className={labelClasses}>Username</p>}
             {!loginPage && (
@@ -97,7 +97,7 @@ const Login = () => {
               </span>
             </div>
             <div className="mt-[12px] mb-[24px]">
-              <IOSSwitch />
+              <MuiSwitch />
               <label className="text-white text-[12px] font-normal ml-2">
                 Remember Me
               </label>
@@ -107,7 +107,7 @@ const Login = () => {
                 onClick={(e) => handleLogIn(e)}
                 className="bg-[#0032ff] hover:bg-[#0033ffb2] rounded-full py-3 text-base font-semibold text-white"
               >
-                Log In
+                Login
               </button>
             ) : (
               <button
@@ -134,12 +134,14 @@ const Login = () => {
             </button>
             <div className="flex justify-center mt-6">
               <p className="text-[#999999] text-xs font-normal">
-                Don&apos;t have an account?{" "}
+                {loginPage
+                  ? "Don't have an account?"
+                  : "Already have an account?"}
                 <span
                   onClick={() => setLoginPage((prev) => !prev)}
                   className="cursor-pointer font-semibold text-[#ffffff] hover:text-[#0032ff] pl-1"
                 >
-                  Sign up
+                  {loginPage ? "Sign Up" : "Login"}
                 </span>
               </p>
             </div>

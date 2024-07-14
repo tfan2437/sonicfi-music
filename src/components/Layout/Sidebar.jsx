@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { assets } from "../assets/assets";
-import { logout } from "../auth/firebase";
+import { assets } from "../../assets/assets";
+import { logout } from "../../auth/firebase";
+import PlaylistBar from "./PlaylistBar";
 
 const Sidebar = () => {
   return (
@@ -46,9 +47,6 @@ const Sidebar = () => {
               <p className="font-bold text-lg">Library</p>
             </div>
           </NavLink>
-          <div className="pr-4 opacity-80 hover:opacity-100 cursor-pointer">
-            <img src={assets.plus} alt="" className="w-5" />
-          </div>
         </div>
         <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4">
           <h1>Create your first playlist</h1>
@@ -57,6 +55,7 @@ const Sidebar = () => {
             Create Playlist
           </button>
         </div>
+        <PlaylistBar />
       </div>
     </div>
   );

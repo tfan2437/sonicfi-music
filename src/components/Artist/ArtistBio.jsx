@@ -6,11 +6,14 @@ import { formatBioText } from "../../utils/format";
 const ArtistAlbums = () => {
   const { artist } = useContext(PlayerContext);
 
+  const placeholderImage = assets.blackImage;
+
   const artistData = artist.data.artist;
   const artistName = artistData.profile.name;
-  const artistBioImage = artistData.visuals.gallery.items[0].sources[0].url;
-  const artistBiography = artistData.profile.biography.text;
-  const artistSocialMediaLinks = artistData.profile.externalLinks.items;
+  const artistBioImage =
+    artistData.visuals.gallery.items[0]?.sources[0]?.url || placeholderImage;
+  const artistBiography = artistData.profile.biography?.text;
+  const artistSocialMediaLinks = artistData.profile.externalLinks?.items;
 
   return (
     <div className="w-full h-auto pb-8 mt-6">

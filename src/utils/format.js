@@ -6,6 +6,8 @@ export const formatPlayCount = (count) => {
 };
 
 export const formatMinutesAndSeconds = (totalMilliseconds) => {
+  if (!totalMilliseconds) return "0:00";
+
   const totalSeconds = Math.floor(totalMilliseconds / 1000);
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
@@ -17,6 +19,8 @@ export const formatArtistsName = (artists) => {
 };
 
 export const formatBioText = (bioText) => {
+  if (bioText === null) return;
+
   const characterMap = {
     "&#34;": '"',
     "&#39;": "'",

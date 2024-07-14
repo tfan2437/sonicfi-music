@@ -2,7 +2,11 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { songsData } from "../assets/assets";
 import { options } from "../utils/spotifyAPI";
 import { getTracksResult } from "../data/fetchObjects";
-import { artistPlaceholder } from "../data/placeholder";
+import {
+  albumMetaPlaceholder,
+  albumPlaceholder,
+  artistPlaceholder,
+} from "../data/placeholder";
 export const PlayerContext = createContext();
 
 const PlayerContextProvider = ({ children }) => {
@@ -11,17 +15,15 @@ const PlayerContextProvider = ({ children }) => {
   const seekBar = useRef();
   const displayRef = useRef();
 
-  const [currentUser, setCurrentUser] = useState({
-    email: "user@streamfi.com",
-    name: "User",
-    uid: "607DZlOZN1gkV0q3AxEfmGieoeu1",
-    authProvider: "StreamFi",
-    profileImage:
-      "https://lh3.googleusercontent.com/a/ACg8ocK64LPrMsp2AVJSU9q76jiZIaBwlu6iUlTiTi7Fdr01o5Queaxa=s96-c",
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [playlist, setPlaylist] = useState(null);
 
   const [track, setTrack] = useState(getTracksResult.tracks[0]);
+  const [tracks, setTracks] = useState(null);
+
   const [artist, setArtist] = useState(artistPlaceholder);
+  const [album, setAlbum] = useState(albumPlaceholder);
+  const [albumMeta, setAlbumMeta] = useState(albumMetaPlaceholder);
   const [playStatus, setPlayStatus] = useState(false);
   const [time, setTime] = useState({
     currentTime: {
@@ -80,7 +82,10 @@ const PlayerContextProvider = ({ children }) => {
     return `${toTwoDigit(time.minute)}:${toTwoDigit(time.second)}`;
   };
 
-  // Spotify API Fetching
+  // track
+  // play
+  // section
+
   const getTrackPreviewById = async (id) => {
     try {
       const response = await fetch(
@@ -97,6 +102,19 @@ const PlayerContextProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const handlePlay = async () => {
+      await play();
+    };
+    handlePlay();
+  }, [track]);
+
+  // track
+  // play
+  // section
+
+  // Spotify API Fetching
+
   const getArtist = async (id) => {
     try {
       const response = await fetch(
@@ -110,6 +128,42 @@ const PlayerContextProvider = ({ children }) => {
 
       const result = await response.json();
       setArtist(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getAlbum = async (id) => {
+    try {
+      const response = await fetch(
+        `https://spotify23.p.rapidapi.com/albums/?ids=${id}`,
+        options
+      );
+
+      if (!response.ok) {
+        throw new Error("Could not fetch the album data.");
+      }
+
+      const result = await response.json();
+      setAlbum(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getAlbumMeta = async (id) => {
+    try {
+      const response = await fetch(
+        `https://spotify23.p.rapidapi.com/album_metadata/?id=${id}`,
+        options
+      );
+
+      if (!response.ok) {
+        throw new Error("Could not fetch the album data.");
+      }
+
+      const result = await response.json();
+      setAlbumMeta(result);
     } catch (error) {
       console.error(error);
     }
@@ -132,13 +186,6 @@ const PlayerContextProvider = ({ children }) => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    const handlePlay = async () => {
-      await play();
-    };
-    handlePlay();
-  }, [track]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -185,12 +232,23 @@ const PlayerContextProvider = ({ children }) => {
     seekSong,
     getTrackPreviewById,
     formatTime,
+
     getArtist,
     artist,
     setArtist,
+    getAlbum,
+    album,
+    setAlbum,
+    getAlbumMeta,
+    albumMeta,
+    setAlbumMeta,
     getTracksByGenre,
     currentUser,
     setCurrentUser,
+    playlist,
+    setPlaylist,
+    tracks,
+    setTracks,
   };
 
   return (

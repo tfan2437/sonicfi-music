@@ -20,9 +20,9 @@ const Player = () => {
   } = useContext(PlayerContext);
 
   const trackPreview = track.preview_url;
-  const trackImage = track.album.images[0].url;
-  const trackName = track.name;
-  const trackArtists = track.artists.map((artist) => artist.name).join(", ");
+  // const trackImage = track.album.images[0].url;
+  // const trackName = track.name;
+  // const trackArtists = track.artists.map((artist) => artist.name).join(", ");
 
   return (
     <div className="h-[10%] bg-black">
@@ -41,13 +41,13 @@ const Player = () => {
         {/* Player Progress Bar */}
       </div>
       <div className="h-full bg-black flex justify-between items-center text-white px-4">
-        <div className="hidden lg:flex items-center gap-4">
+        {/* <div className="hidden lg:flex items-center gap-4">
           <img className="w-12" src={trackImage} alt="" />
           <div>
             <p>{trackName}</p>
             <p>{trackArtists}</p>
           </div>
-        </div>
+        </div> */}
         <div className="flex flex-col items-center gap-1 m-auto">
           <div className="flex gap-4">
             <img
@@ -96,12 +96,11 @@ const Player = () => {
             </p>
           </div>
 
-          <img className="w-4" src={assets.microphone} alt="" />
-          <img className="w-4" src={assets.volume_icon} alt="" />
+          <img className="w-5" src={assets.volume} alt="" />
           <VolumeControl />
-          <img className="w-4" src={assets.zoom_icon} alt="" />
+          <img className="w-5" src={assets.handThick} alt="" />
         </div>
-        <audio ref={audioRef} src={trackPreview} preload="auto"></audio>
+        <audio ref={audioRef} src={track.preview_url} preload="auto"></audio>
       </div>
     </div>
   );

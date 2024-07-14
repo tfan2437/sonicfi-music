@@ -59,8 +59,13 @@ import playBlack from "./icon-play-black.png";
 import microphone from "./icon-microphone.png";
 import album from "./icon-album.png";
 import hand from "./icon-hand.png";
+import handThick from "./icon-hand-thick.png";
+
 import artist from "./icon-artist.png";
 import more from "./icon-more-dots.png";
+import volume from "./icon-volume.png";
+
+import blackImage from "./image-black.jpg";
 
 export const assets = {
   bell_icon,
@@ -102,8 +107,11 @@ export const assets = {
   microphone,
   album,
   hand,
+  handThick,
   artist,
   more,
+  blackImage,
+  volume,
 };
 
 export const albumsData = [

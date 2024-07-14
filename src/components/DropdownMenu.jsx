@@ -1,6 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { formatMinutesAndSeconds } from "../utils/format";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../auth/firebase";
+import { useContext } from "react";
+import { PlayerContext } from "../context/PlayerContext";
 
-const DropdownMenu = ({ artistId, albumId }) => {
+const DropdownMenu = ({ track }) => {
+  const navigate = useNavigate();
+
+  const { currentUser, setPlaylist } = useContext(PlayerContext);
+
   const menuSelection = [
     [assets.plus, "Add to playlist"],
     [assets.artist, "Go to artist"],
@@ -8,15 +18,60 @@ const DropdownMenu = ({ artistId, albumId }) => {
     [assets.hand, "View lyrics"],
   ];
 
+  const targetTrack = {
+    artist: {
+      id: track.artists[0].id,
+      name: track.artists[0].name,
+    },
+    album: {
+      id: track.album.uri.slice(14, 36),
+      name: track.album.name,
+    },
+    id: track.id,
+    image: track.album.images[0].url,
+    name: track.name,
+    preview_url: track.preview_url,
+    duration_formated: formatMinutesAndSeconds(track.duration_ms),
+  };
+
+  const addToPlaylist = async () => {
+    if (currentUser) {
+      // Query playlist
+      const playlistRef = doc(db, "playlists", currentUser.uid);
+      const playlistDoc = await getDoc(playlistRef);
+
+      // if No playlist, create one
+      if (!playlistDoc.exists()) {
+        await setDoc(doc(db, "playlists", currentUser.uid), {
+          uid: currentUser.uid,
+          name: "My Playlist",
+          tracks: [],
+        });
+      }
+
+      // get new playlist data
+      const newPlaylistDoc = await getDoc(playlistRef);
+      const playlistData = newPlaylistDoc.data();
+
+      // add the target track to playlist
+      const updatedTracks = [...playlistData.tracks, targetTrack];
+      await setDoc(playlistRef, { ...playlistData, tracks: updatedTracks });
+      setPlaylist({ ...playlistData, tracks: updatedTracks });
+    }
+  };
+
   const handleSelect = (index) => {
     if (index === 0) {
       console.log("Add to playlist");
+      addToPlaylist();
     } else if (index === 1) {
-      console.log("Navigate to: " + artistId);
+      console.log("Navigate to: " + targetTrack.artist.id);
+      navigate(`/artist/${targetTrack.artist.id}`);
     } else if (index === 2) {
-      console.log("Navigate to: " + albumId);
+      console.log("Navigate to: " + targetTrack.album.id);
+      navigate(`/album/${targetTrack.album.id}`);
     } else {
-      console.log("Show Lyrics");
+      console.log("targetTrack");
     }
   };
 

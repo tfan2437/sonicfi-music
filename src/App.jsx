@@ -1,32 +1,33 @@
 import Login from "./components/Login";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { PlayerContext } from "./context/PlayerContext";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "./auth/firebase";
-import MainLayout from "./components/MainLayout";
 import { Routes, Route } from "react-router-dom";
 
+import MainLayout from "./components/Layout/MainLayout";
 import ArtistPage from "./components/Artist/ArtistPage";
-import Album from "./components/Album/Album";
+import AlbumPage from "./components/Album/AlbumPage";
 import HomePage from "./components/Home/HomePage";
 
-import { collection, query, where, getDocs } from "firebase/firestore";
-import Test from "./components/Test";
+import { doc, getDoc } from "firebase/firestore";
 
 const App = () => {
   const navigate = useNavigate();
 
-  const { currentUser, setCurrentUser } = useContext(PlayerContext);
+  const { currentUser, setCurrentUser, setPlaylist } =
+    useContext(PlayerContext);
 
+  // User auth status check
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const q = query(collection(db, "users"), where("uid", "==", user.uid));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          setCurrentUser(doc.data());
-        });
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+        setCurrentUser(userData);
+        console.log("user update");
       } else {
         console.log("No User");
         navigate("/login");
@@ -36,8 +37,25 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
+  // if user updated get the playlist
   useEffect(() => {
-    console.log(currentUser);
+    if (currentUser) {
+      console.log(currentUser);
+
+      const getPlaylist = async () => {
+        const playlistRef = doc(db, "playlists", currentUser.uid);
+        const playlistDoc = await getDoc(playlistRef);
+        if (!playlistDoc.exists()) return;
+
+        const playlistData = playlistDoc.data();
+        setPlaylist(playlistData);
+      };
+
+      getPlaylist();
+      return () => {
+        console.log("Get playlist from database.");
+      };
+    }
   }, [currentUser]);
 
   return (
@@ -45,7 +63,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/austin" element={<Album />} />
+        <Route path="/album/:id" element={<AlbumPage />} />
         <Route path="/artist/:id" element={<ArtistPage />} />
       </Route>
     </Routes>
