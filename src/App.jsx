@@ -12,6 +12,7 @@ import AlbumPage from "./components/Album/AlbumPage";
 import HomePage from "./components/Home/HomePage";
 
 import { doc, getDoc } from "firebase/firestore";
+import { getTracksById } from "./utils/spotifyAPI";
 
 const App = () => {
   const navigate = useNavigate();
@@ -27,21 +28,19 @@ const App = () => {
         const userDoc = await getDoc(userRef);
         const userData = userDoc.data();
         setCurrentUser(userData);
-        console.log("user update");
+        console.log("user valid");
       } else {
         console.log("No User");
         navigate("/login");
       }
     });
-
+    // getTracksById("7CyPwkp0oE8Ro9Dd5CUDjW");
     return () => unsubscribe();
   }, []);
 
   // if user updated get the playlist
   useEffect(() => {
     if (currentUser) {
-      console.log(currentUser);
-
       const getPlaylist = async () => {
         const playlistRef = doc(db, "playlists", currentUser.uid);
         const playlistDoc = await getDoc(playlistRef);

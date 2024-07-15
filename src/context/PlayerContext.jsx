@@ -6,6 +6,7 @@ import {
   albumMetaPlaceholder,
   albumPlaceholder,
   artistPlaceholder,
+  trackPlaceholder,
 } from "../data/placeholder";
 export const PlayerContext = createContext();
 
@@ -18,13 +19,17 @@ const PlayerContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [playlist, setPlaylist] = useState(null);
 
-  const [track, setTrack] = useState(getTracksResult.tracks[0]);
+  const [track, setTrack] = useState(trackPlaceholder.tracks[0]);
   const [tracks, setTracks] = useState(null);
+
+  const [trackIndex, setTrackIndex] = useState(0);
+
+  const [playStatus, setPlayStatus] = useState(false);
 
   const [artist, setArtist] = useState(artistPlaceholder);
   const [album, setAlbum] = useState(albumPlaceholder);
   const [albumMeta, setAlbumMeta] = useState(albumMetaPlaceholder);
-  const [playStatus, setPlayStatus] = useState(false);
+
   const [time, setTime] = useState({
     currentTime: {
       second: 0,
@@ -50,19 +55,38 @@ const PlayerContextProvider = ({ children }) => {
     setPlayStatus(false);
   };
 
-  const previous = async () => {
-    if (track.id > 0) {
-      await setTrack(songsData[track.id - 1]);
-      await play();
-    }
+  // new
+  // new
+
+  const next = () => {
+    console.log(tracks.tracks.length);
+    setTrackIndex((prevIndex) => (prevIndex + 1) % tracks.tracks.length);
   };
 
-  const next = async () => {
-    if (track.id < songsData.length - 1) {
-      await setTrack(songsData[track.id + 1]);
-      await play();
-    }
+  const previous = () => {
+    setTrackIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + tracksObject.tracks.length) %
+        tracksObject.tracks.length
+    );
   };
+
+  // new
+  // new
+
+  // const previous = async () => {
+  //   if (track.id > 0) {
+  //     await setTrack(songsData[track.id - 1]);
+  //     await play();
+  //   }
+  // };
+
+  // const next = async () => {
+  //   if (track.id < songsData.length - 1) {
+  //     await setTrack(songsData[track.id + 1]);
+  //     await play();
+  //   }
+  // };
 
   const seekSong = async (e) => {
     audioRef.current.currentTime =

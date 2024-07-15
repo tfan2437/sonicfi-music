@@ -9,7 +9,6 @@ const HomePage = () => {
       <hr className="opacity-25 mt-10" />
       <GenreKpop />
       <hr className="opacity-25 mt-10" />
-
       <hr className="opacity-25 mt-10" />
     </div>
   );

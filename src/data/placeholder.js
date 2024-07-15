@@ -1,3 +1,32 @@
+export const trackPlaceholder = {
+  tracks: [
+    {
+      album: {
+        id: "42WVQWuf1teDysXiOupIZt",
+        images: [
+          {
+            url: "https://i.scdn.co/image/ab67616d0000b273f54b99bf27cda88f4a7403ce",
+          },
+        ],
+        name: "Birds In The Trap Sing McKnight",
+      },
+      artists: [
+        {
+          id: "0Y5tJX1MQlPlqiwlOH1tJY",
+          name: "Travis Scott",
+        },
+      ],
+
+      duration_ms: 243836,
+      id: "6gBFPUFcJLzWGx4lenP6h2",
+      name: "goosebumps",
+      popularity: 86,
+      preview_url:
+        "https://p.scdn.co/mp3-preview/5c45fee2743d39984ed2c1e2493d04a42d626f81?cid=d8a5ed958d274c2e8ee717e6a4b0971d",
+    },
+  ],
+};
+
 export const artistPlaceholder = {
   data: {
     artist: {

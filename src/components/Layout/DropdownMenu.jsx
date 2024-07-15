@@ -1,18 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
-import { formatMinutesAndSeconds } from "../utils/format";
+import { assets } from "../../assets/assets";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../auth/firebase";
 import { useContext, useEffect } from "react";
-import { PlayerContext } from "../context/PlayerContext";
+import { PlayerContext } from "../../context/PlayerContext";
 
-const DropdownMenu = ({ track }) => {
+const PlaylistMenu = ({ track }) => {
   const navigate = useNavigate();
 
   const { currentUser, setPlaylist, playlist } = useContext(PlayerContext);
 
   const menuSelection = [
-    [assets.plus, "Add to playlist"],
+    [assets.plus, "Remove from playlist"],
     [assets.artist, "Go to artist"],
     [assets.album, "Go to album"],
     [assets.hand, "View lyrics"],
@@ -102,4 +101,4 @@ const DropdownMenu = ({ track }) => {
   );
 };
 
-export default DropdownMenu;
+export default PlaylistMenu;

@@ -5,7 +5,7 @@ import PlaylistBar from "./PlaylistBar";
 
 const Sidebar = () => {
   return (
-    <div className="w-[20%] h-full hidden lg:flex flex-col p-2 text-white overflow-hidden">
+    <div className="w-[20%] h-full hidden lg:flex flex-col p-2 text-white overflow-auto">
       <div className="bg-black h-auto flex flex-col gap-6 pb-6">
         <NavLink to={"/"}>
           <div className="pt-3 pl-6 pb-2">
