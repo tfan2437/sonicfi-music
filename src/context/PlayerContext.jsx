@@ -20,8 +20,7 @@ const PlayerContextProvider = ({ children }) => {
   const [playlist, setPlaylist] = useState(null);
 
   const [track, setTrack] = useState(trackPlaceholder.tracks[0]);
-  const [tracks, setTracks] = useState(null);
-
+  const [tracks, setTracks] = useState(trackPlaceholder.tracks);
   const [trackIndex, setTrackIndex] = useState(0);
 
   const [playStatus, setPlayStatus] = useState(false);
@@ -41,6 +40,8 @@ const PlayerContextProvider = ({ children }) => {
     },
   });
 
+  // new
+
   const play = async () => {
     try {
       await audioRef.current.play();
@@ -55,38 +56,25 @@ const PlayerContextProvider = ({ children }) => {
     setPlayStatus(false);
   };
 
-  // new
-  // new
-
   const next = () => {
-    console.log(tracks.tracks.length);
-    setTrackIndex((prevIndex) => (prevIndex + 1) % tracks.tracks.length);
+    if (tracks.length === 1) {
+      audioRef.current.currentTime = 0;
+      play();
+    } else {
+      setTrackIndex((prev) => (prev + 1) % tracks.length);
+    }
   };
 
   const previous = () => {
-    setTrackIndex(
-      (prevIndex) =>
-        (prevIndex - 1 + tracksObject.tracks.length) %
-        tracksObject.tracks.length
-    );
+    if (tracks.length === 1) {
+      audioRef.current.currentTime = 0;
+      play();
+    } else {
+      setTrackIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
+    }
   };
 
   // new
-  // new
-
-  // const previous = async () => {
-  //   if (track.id > 0) {
-  //     await setTrack(songsData[track.id - 1]);
-  //     await play();
-  //   }
-  // };
-
-  // const next = async () => {
-  //   if (track.id < songsData.length - 1) {
-  //     await setTrack(songsData[track.id + 1]);
-  //     await play();
-  //   }
-  // };
 
   const seekSong = async (e) => {
     audioRef.current.currentTime =
@@ -120,18 +108,12 @@ const PlayerContextProvider = ({ children }) => {
         throw new Error("Could not fetch the track data.");
       }
       const result = await response.json();
-      setTrack(result.tracks[0]);
+      setTracks(result.tracks);
+      setTrackIndex(0);
     } catch (error) {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    const handlePlay = async () => {
-      await play();
-    };
-    handlePlay();
-  }, [track]);
 
   // track
   // play
@@ -273,6 +255,8 @@ const PlayerContextProvider = ({ children }) => {
     setPlaylist,
     tracks,
     setTracks,
+    trackIndex,
+    setTrackIndex,
   };
 
   return (

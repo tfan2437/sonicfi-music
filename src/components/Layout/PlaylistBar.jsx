@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
+import { assets } from "../../assets/assets";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../../auth/firebase";
 
 const PlaylistBar = () => {
-  const { playlist, tracks, setTracks, track, setTrack } =
+  const { playlist, setPlaylist, setTracks, setTrackIndex, currentUser } =
     useContext(PlayerContext);
-  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const tracksUpdate = () => {
     return new Promise((resolve, reject) => {
@@ -17,60 +19,46 @@ const PlaylistBar = () => {
     });
   };
 
-  const currentTrackUpdate = (index) => {
-    return new Promise((resolve, reject) => {
-      try {
-        setTrack(tracks[index]);
-        resolve("current track updated");
-      } catch (error) {
-        reject("current track update failed");
-      }
-    });
-  };
-
-  // after click the track, the whole playlist will add to setTracks (PlayerContext)
   const handleTrackUpdate = async (index) => {
     try {
       await tracksUpdate();
-      setSelectedIndex(index);
+      setTrackIndex(index);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // if detected change of tracks, then add selected index track to setTrack and play
-  useEffect(() => {
-    const updateTrack = async () => {
-      if (selectedIndex !== null) {
-        try {
-          await currentTrackUpdate(selectedIndex);
-          setSelectedIndex(null);
-        } catch (error) {
-          console.error(error);
-        }
+  const removeFromPlaylist = async (targetIndex) => {
+    if (currentUser) {
+      const playlistRef = doc(db, "playlists", currentUser.uid);
+      const playlistDoc = await getDoc(playlistRef);
+      if (!playlistDoc.exists()) {
+        return;
       }
-    };
 
-    updateTrack();
-  }, [tracks, selectedIndex]);
+      const playlistData = playlistDoc.data();
 
-  const removeTrackByIndex = (tracks, index) => {
-    if (index > -1 && index < tracks.length) {
-      tracks.splice(index, 1);
+      const originalTracks = [...playlistData.tracks];
+      console.log(originalTracks);
+
+      const updatedTracks = originalTracks.filter((_, i) => i !== targetIndex);
+      console.log(updatedTracks);
+
+      await setDoc(playlistRef, { ...playlistData, tracks: updatedTracks });
+      setPlaylist({ ...playlistData, tracks: updatedTracks });
     }
   };
 
   return (
-    <>
-      {playlist && (
-        <div className="flex flex-col w-[400px] h-auto overflow-scroll bg-dark2 mx-2 mt-2 rounded-lg text-[#a7a7a7] cursor-pointer">
-          <p className="text-white font-bold text-lg mt-2 ml-2">
-            Playlist Tracks
-          </p>
-          {playlist.tracks.map((track, index) => (
+    <div className="flex flex-col w-full h-auto bg-black ml-3 mr-2 mt-4 rounded-lg text-[#a7a7a7] cursor-pointer">
+      {playlist &&
+        playlist.tracks.map((track, index) => (
+          <div
+            key={index}
+            className="flex justify-between items-center bg-black hover:bg-dark3 px-2 py-2 rounded mr-4 relative"
+          >
             <div
-              key={index}
-              className="flex items-center hover:bg-[#333333a1] px-1 md:px-2 py-1 md:py-2 rounded"
+              className="flex items-center"
               onClick={() => handleTrackUpdate(index)}
             >
               <img
@@ -79,7 +67,7 @@ const PlaylistBar = () => {
                 className="w-14 rounded-sm z-200"
               />
               <div className="ml-2">
-                <p className="text-white font-medium text-nowrap overflow-hidden mr-2 mt-1">
+                <p className="w-[120px] 2xl:w-[210px] text-white font-medium text-nowrap overflow-hidden mr-2 mt-1">
                   {track.name}
                 </p>
                 <p className="flex items-center gap-1 text-[#999999] font-light text-[14px]">
@@ -87,10 +75,15 @@ const PlaylistBar = () => {
                 </p>
               </div>
             </div>
-          ))}
-        </div>
-      )}
-    </>
+            <div
+              className="z-50 opacity-10 hover:opacity-50 p-1 cursor-pointer"
+              onClick={() => removeFromPlaylist(index)}
+            >
+              <img src={assets.trashCan} alt="" className="w-5" />
+            </div>
+          </div>
+        ))}
+    </div>
   );
 };
 

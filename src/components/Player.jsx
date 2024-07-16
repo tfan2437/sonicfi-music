@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { assets } from "../assets/assets";
 import { PlayerContext } from "../context/PlayerContext";
 import VolumeControl from "./Player/VolumeControl";
@@ -17,12 +17,29 @@ const Player = () => {
     seekSong,
     audioRef,
     formatTime,
+    album,
+    setAlbum,
+    getAlbumMeta,
+    albumMeta,
+    setAlbumMeta,
+    getTracksByGenre,
+    currentUser,
+    setCurrentUser,
+    playlist,
+    setPlaylist,
+    tracks,
+    setTracks,
+    trackIndex,
+    setTrackIndex,
   } = useContext(PlayerContext);
 
-  const trackPreview = track.preview_url;
-  const trackImage = track.album.images[0].url;
-  const trackName = track.name;
-  const trackArtists = track.artists.map((artist) => artist.name).join(", ");
+  // const trackImage = tracks[trackIndex].album.images[0].url;
+  // const trackName = tracks[trackIndex].name;
+  // const trackArtists = tracks[trackIndex].artists.map((artist) => artist.name).join(", ");
+
+  useEffect(() => {
+    play();
+  }, [tracks, trackIndex]);
 
   return (
     <div className="h-[10%] bg-black">
@@ -42,10 +59,18 @@ const Player = () => {
       </div>
       <div className="h-full bg-black flex justify-between items-center text-white px-4">
         <div className="hidden lg:flex items-center gap-4">
-          <img className="w-12" src={trackImage} alt="" />
+          <img
+            className="w-12"
+            src={tracks[trackIndex].album.images[0].url}
+            alt=""
+          />
           <div>
-            <p>{trackName}</p>
-            <p>{trackArtists}</p>
+            <p>{tracks[trackIndex].name}</p>
+            <p>
+              {tracks[trackIndex].artists
+                .map((artist) => artist.name)
+                .join(", ")}
+            </p>
           </div>
         </div>
         <div className="flex flex-col items-center gap-1 m-auto">
@@ -103,7 +128,12 @@ const Player = () => {
 
           <img className="w-5" src={assets.handThick} alt="" />
         </div>
-        <audio ref={audioRef} src={track.preview_url} preload="auto"></audio>
+        <audio
+          ref={audioRef}
+          src={tracks[trackIndex].preview_url}
+          preload="auto"
+          onEnded={next}
+        ></audio>
       </div>
     </div>
   );

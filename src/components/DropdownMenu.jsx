@@ -9,7 +9,7 @@ import { PlayerContext } from "../context/PlayerContext";
 const DropdownMenu = ({ track }) => {
   const navigate = useNavigate();
 
-  const { currentUser, setPlaylist, playlist } = useContext(PlayerContext);
+  const { currentUser, setPlaylist } = useContext(PlayerContext);
 
   const menuSelection = [
     [assets.plus, "Add to playlist"],
@@ -81,10 +81,6 @@ const DropdownMenu = ({ track }) => {
       console.log("targetTrack");
     }
   };
-
-  useEffect(() => {
-    console.log(playlist);
-  }, [playlist]);
 
   return (
     <div className="absolute top-[32px] right-[4px] w-auto h-auto z-20 bg-[#00000071] backdrop-blur-2xl rounded-md">

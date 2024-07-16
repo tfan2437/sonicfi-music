@@ -2,8 +2,13 @@ import { NavLink } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { logout } from "../../auth/firebase";
 import PlaylistBar from "./PlaylistBar";
+import { useState } from "react";
 
 const Sidebar = () => {
+  const [showPlaylist, setShowPlaylist] = useState(true);
+
+  const playlistStyle = showPlaylist ? "" : "hidden";
+
   return (
     <div className="w-[20%] h-full hidden lg:flex flex-col p-2 text-white overflow-auto">
       <div className="bg-black h-auto flex flex-col gap-6 pb-6">
@@ -41,21 +46,25 @@ const Sidebar = () => {
       </div>
       <div className="bg-[#121212]">
         <div className="flex justify-between items-center">
-          <NavLink to={"/"}>
-            <div className="flex items-center gap-[7px] pl-6 opacity-85 hover:opacity-100">
-              <img className="w-[25px] pl-[1px]" src={assets.playlist} alt="" />
-              <p className="font-bold text-lg">Library</p>
-            </div>
-          </NavLink>
+          <div
+            className="flex items-center gap-[7px] pl-6 opacity-85 hover:opacity-100 cursor-pointer"
+            onClick={() => setShowPlaylist((prev) => !prev)}
+          >
+            <img className="w-[25px] pl-[1px]" src={assets.playlist} alt="" />
+            <p className="font-bold text-lg">Playlist</p>
+          </div>
         </div>
-        <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4">
+        {/* <hr className="opacity-20 mx-2" /> */}
+        {/* <div className="p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4">
           <h1>Create your first playlist</h1>
           <p className="font-light">It is easy we will help you</p>
           <button className="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4">
             Create Playlist
           </button>
+        </div> */}
+        <div className={playlistStyle}>
+          <PlaylistBar />
         </div>
-        <PlaylistBar />
       </div>
     </div>
   );

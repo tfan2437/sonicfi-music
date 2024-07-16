@@ -16,13 +16,20 @@ const ArtistPage = () => {
     getArtist(id);
   }, []);
 
-  const artistData = artist.data.artist;
-  const artistName = artistData.profile.name;
-  const artistTopTracks = artistData.discography.topTracks?.items;
-
-  const placeholderImage = assets.blackImage;
+  const artistName = artist.data.artist.profile.name;
+  const artistTopTracks = artist.data.artist.discography.topTracks?.items;
   const artistHeaderImage =
-    artistData.visuals.headerImage?.sources[0]?.url || placeholderImage;
+    artist.data.artist.visuals.headerImage?.sources[0]?.url ||
+    assets.blackImage;
+
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const handleMenu = (index) => {
+    if (selectedIndex === index) {
+      setSelectedIndex(null);
+    } else {
+      setSelectedIndex(index);
+    }
+  };
 
   return (
     <div className="w-full h-full">

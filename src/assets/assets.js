@@ -64,6 +64,7 @@ import handThick from "./icon-hand-thick.png";
 import artist from "./icon-artist.png";
 import more from "./icon-more-dots.png";
 import volume from "./icon-volume.png";
+import trashCan from "./icon-trash-can.png";
 
 import blackImage from "./image-black.jpg";
 
@@ -112,6 +113,7 @@ export const assets = {
   more,
   blackImage,
   volume,
+  trashCan,
 };
 
 export const albumsData = [
