@@ -1,3 +1,544 @@
+export const searchPlaceholder = {
+  albums: {
+    items: [
+      {
+        id: "6r1lh7fHMB499vGKtIyJLy",
+        name: "AUSTIN",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e0271cae34ad5a39bdab78af13e",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+      },
+      {
+        id: "4XahqkOmEsKLKEhBpX8DAe",
+        name: "Dial Drunk (with Post Malone)",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e02f519f148d88bf65074b4a3a9",
+        artists: [
+          {
+            id: "2RQXRUsr4IW1f3mKyKsy4B",
+            name: "Noah Kahan",
+          },
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+      },
+      {
+        id: "4g1ZRSobMefqF6nelkgibi",
+        name: "Hollywood's Bleeding",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e029478c87599550dd73bfa7e02",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+      },
+      {
+        id: "1WE56xSN0l6bnwGyLeQWdz",
+        name: "Pour Me A Drink",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e020e6e0f5fad0f7419d873acba",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+          {
+            id: "1UTPBmNbXNTittyMJrNkvw",
+            name: "Blake Shelton",
+          },
+        ],
+      },
+      {
+        id: "1woYXxyyxTQJ0E0AhZE6mj",
+        name: "I Had Some Help",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e0297306976e3eb8aad53b754eb",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+          {
+            id: "4oUHIQIBe0LHzYfvXNW4QM",
+            name: "Morgan Wallen",
+          },
+        ],
+      },
+      {
+        id: "5s0rmjP8XOPhP6HhqOhuyC",
+        name: "Stoney (Deluxe)",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e0255404f712deb84d0650a4b41",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+      },
+      {
+        id: "6trNtQUgC8cgbWcqoMYkOR",
+        name: "beerbongs & bentleys",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e02b1c4b76e23414c9f20242268",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+      },
+      {
+        id: "1agEHpWnELaZHWzcbGDCpu",
+        name: "Fortnight (feat. Post Malone) [BLOND:ISH Remix]",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e02e6b77b3eef9269d06e13fe17",
+        artists: [
+          {
+            id: "06HL4z0CvFAxyc27GXpf02",
+            name: "Taylor Swift",
+          },
+          {
+            id: "6zsJjoCtL1WByG0VsuFWzR",
+            name: "BLOND:ISH",
+          },
+        ],
+      },
+      {
+        id: "3HHNR44YbP7XogMVwzbodx",
+        name: "Twelve Carat Toothache",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e0234362676667a4322838ccc97",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+      },
+      {
+        id: "1F9LY06gadScF4g3g3BrDC",
+        name: "AUSTIN (Bonus)",
+        images:
+          "https://i.scdn.co/image/ab67616d00001e02d84eb47817bacd302f0529a4",
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+      },
+    ],
+  },
+  artists: {
+    items: [
+      {
+        id: "246dkjvS1zLTtiykXe5h60",
+        name: "Post Malone",
+        images:
+          "https://i.scdn.co/image/ab6761610000e5ebe17c0aa1714a03d62b5ce4e0",
+      },
+      {
+        id: "4oUHIQIBe0LHzYfvXNW4QM",
+        name: "Morgan Wallen",
+        images:
+          "https://i.scdn.co/image/ab6761610000e5ebcdb9694bfa4a026ee19426ae",
+      },
+      {
+        id: "4IK5qxCsCE5VcLveibJA08",
+        name: "Post Malone Zombie",
+        images:
+          "https://i.scdn.co/image/ab67616d0000b2733cfc22d85e98ab93e37c9d29",
+      },
+      {
+        id: "0T79kLFdWyZ3bxdIxMA1P1",
+        name: "Post Malone Sample",
+        images: "",
+      },
+      {
+        id: "3TVXtAsR1Inumwj472S9r4",
+        name: "Drake",
+        images:
+          "https://i.scdn.co/image/ab6761610000e5eb4293385d324db8558179afd9",
+      },
+      {
+        id: "5HMPwywce9LhKYEvO7DqdK",
+        name: "The Post Malone Piano Cover Band",
+        images:
+          "https://i.scdn.co/image/ab67616d0000b273e62038e4cb6779ee39181f04",
+      },
+      {
+        id: "4MCBfE4596Uoi2O4DtmEMz",
+        name: "Juice WRLD",
+        images:
+          "https://i.scdn.co/image/ab6761610000e5eb1908e1a8b79abf71d5598944",
+      },
+      {
+        id: "718COspgdWOnwOFpJHRZHS",
+        name: "Luke Combs",
+        images:
+          "https://i.scdn.co/image/ab6761610000e5ebbd634295d99c61823c517c3f",
+      },
+      {
+        id: "2RQXRUsr4IW1f3mKyKsy4B",
+        name: "Noah Kahan",
+        images:
+          "https://i.scdn.co/image/ab6761610000e5eb336ec53126239813d38ff588",
+      },
+      {
+        id: "2YZyLoL8N0Wb9xBt1NhZWg",
+        name: "Kendrick Lamar",
+        images:
+          "https://i.scdn.co/image/ab6761610000e5eb437b9e2a82505b3d93ff1022",
+      },
+    ],
+  },
+
+  tracks: {
+    items: [
+      {
+        album: {
+          id: "1woYXxyyxTQJ0E0AhZE6mj",
+          name: "I Had Some Help",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e0297306976e3eb8aad53b754eb",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 178205,
+        id: "7221xIgOnuakPdLqT0F3nP",
+        name: "I Had Some Help (Feat. Morgan Wallen)",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "1WE56xSN0l6bnwGyLeQWdz",
+          name: "Pour Me A Drink",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e020e6e0f5fad0f7419d873acba",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 195122,
+        id: "5ZLL6wYXeqg0k35ZkDRfhZ",
+        name: "Pour Me A Drink (Feat. Blake Shelton)",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "5s0rmjP8XOPhP6HhqOhuyC",
+          name: "Stoney (Deluxe)",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e0255404f712deb84d0650a4b41",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 223346,
+        id: "75ZvA4QfFiZvzhj2xkaWAh",
+        name: "I Fall Apart",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "1Mo4aZ8pdj6L1jx8zSwJnt",
+          name: "THE TORTURED POETS DEPARTMENT",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e025076e4160d018e378f488c33",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "06HL4z0CvFAxyc27GXpf02",
+            name: "Taylor Swift",
+          },
+        ],
+        duration_ms: 228965,
+        id: "2OzhQlSqBEmt7hmkYxfT6m",
+        name: "Fortnight (feat. Post Malone)",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "4g1ZRSobMefqF6nelkgibi",
+          name: "Hollywood's Bleeding",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e029478c87599550dd73bfa7e02",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 215280,
+        id: "21jGcNKet2qwijlDFuPiPb",
+        name: "Circles",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "6trNtQUgC8cgbWcqoMYkOR",
+          name: "beerbongs & bentleys",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02b1c4b76e23414c9f20242268",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 231266,
+        id: "7dt6x5M1jzdTEt8oCbisTK",
+        name: "Better Now",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "4XahqkOmEsKLKEhBpX8DAe",
+          name: "Dial Drunk (with Post Malone)",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02f519f148d88bf65074b4a3a9",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "2RQXRUsr4IW1f3mKyKsy4B",
+            name: "Noah Kahan",
+          },
+        ],
+        duration_ms: 213817,
+        id: "22VHOlVYBqytsrAqV8yXBK",
+        name: "Dial Drunk (with Post Malone)",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "4g1ZRSobMefqF6nelkgibi",
+          name: "Hollywood's Bleeding",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e029478c87599550dd73bfa7e02",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 149546,
+        id: "7xQAfvXzm3AkraOtGPWIZg",
+        name: "Wow.",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "4g1ZRSobMefqF6nelkgibi",
+          name: "Hollywood's Bleeding",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e029478c87599550dd73bfa7e02",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 157560,
+        id: "0RiRZpuVRbi7oqRdSMwhQY",
+        name: "Sunflower - Spider-Man: Into the Spider-Verse",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "5s0rmjP8XOPhP6HhqOhuyC",
+          name: "Stoney (Deluxe)",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e0255404f712deb84d0650a4b41",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 220293,
+        id: "3a1lNhkSLSkpJE4MSHpDu9",
+        name: "Congratulations",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "3HHNR44YbP7XogMVwzbodx",
+          name: "Twelve Carat Toothache",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e0234362676667a4322838ccc97",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 192840,
+        id: "0O6u0VJ46W86TxN9wgyqDj",
+        name: "I Like You (A Happier Song) (with Doja Cat)",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "5s0rmjP8XOPhP6HhqOhuyC",
+          name: "Stoney (Deluxe)",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e0255404f712deb84d0650a4b41",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 256532,
+        id: "6eT7xZZlB2mwyzJ2sUKG6w",
+        name: "White Iverson",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "5IYMYmX28qpI6OEnQhdazX",
+          name: "Fortnight (Acoustic Version)",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02aecb5c6308cf8ce94199aea8",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "06HL4z0CvFAxyc27GXpf02",
+            name: "Taylor Swift",
+          },
+        ],
+        duration_ms: 228965,
+        id: "6GrvlxquXWumwyNeZb1oZz",
+        name: "Fortnight (feat. Post Malone)",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "7qcSUc5Af63mhfTF60KTEA",
+          name: "Chemical",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02f76f8deeba5370c98ad38f1c",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 184013,
+        id: "5w40ZYhbBMAlHYNDaVJIUu",
+        name: "Chemical",
+        popularity: 0,
+        preview_url: "",
+      },
+      {
+        album: {
+          id: "6trNtQUgC8cgbWcqoMYkOR",
+          name: "beerbongs & bentleys",
+          images: [
+            {
+              url: "https://i.scdn.co/image/ab67616d00001e02b1c4b76e23414c9f20242268",
+            },
+          ],
+        },
+        artists: [
+          {
+            id: "246dkjvS1zLTtiykXe5h60",
+            name: "Post Malone",
+          },
+        ],
+        duration_ms: 218146,
+        id: "0e7ipj03S05BNilyu5bRzt",
+        name: "rockstar (feat. 21 Savage)",
+        popularity: 0,
+        preview_url: "",
+      },
+    ],
+  },
+};
+
 export const trackPlaceholder = {
   tracks: [
     {

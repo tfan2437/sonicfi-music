@@ -7,46 +7,32 @@ import { useNavigate, useParams } from "react-router-dom";
 const AlbumPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const {
-    getTrackPreviewById,
     getAlbum,
     album,
     getAlbumMeta,
     albumMeta,
     getArtist,
     artist,
+    setTracks,
+    setTrackIndex,
   } = useContext(PlayerContext);
 
+  const [formated, setFormated] = useState(false);
+
+  // Album infomation
   const albumData = album.albums[0];
   const albumTracks = album.albums[0].tracks.items;
-
   const albumMetadata = albumMeta.data.album;
   const albumHexColor =
     albumMetadata.coverArt.extractedColors.colorRaw.hex + "c1";
 
-  useEffect(() => {
-    const updateAlbumPage = async () => {
-      await getAlbum(id);
-      await getAlbumMeta(id);
-    };
-
-    updateAlbumPage();
-  }, [id]);
-
-  useEffect(() => {
-    const updateRecentAlbumList = async () => {
-      const albumArtistId = album.albums[0].artists[0].id;
-      await getArtist(albumArtistId);
-    };
-
-    updateRecentAlbumList();
-  }, [album]);
-
+  // Album and Single on sidebar
   const albums = artist.data.artist.discography.albums.items;
   const singles = artist.data.artist.discography.singles.items;
-  const albumsAndSingles = [...albums, ...singles];
-
-  albumsAndSingles.sort((a, b) => {
+  const albumList = [...albums, ...singles];
+  albumList.sort((a, b) => {
     const dateA = new Date(
       a.releases.items[0].date.year,
       a.releases.items[0].date.month - 1
@@ -57,6 +43,65 @@ const AlbumPage = () => {
     );
     return dateB - dateA;
   });
+
+  const formatTracks = (albumResult) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const formattedItems = albumResult.albums[0].tracks.items.map(
+          (track) => ({
+            album: {
+              id: albumResult.albums[0].id,
+              name: albumResult.albums[0].name,
+              images: [
+                {
+                  url: albumResult.albums[0].images[0].url,
+                },
+              ],
+            },
+            artists: track.artists.map((artist) => ({
+              id: artist.id,
+              name: artist.name,
+            })),
+            duration_ms: track.duration_ms,
+            id: track.id,
+            name: track.name,
+            preview_url: track.preview_url,
+          })
+        );
+        resolve(formattedItems);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  const handlePlayAlbumTracks = async (index) => {
+    if (!formated) {
+      const albumTracks = await formatTracks(album);
+      setTracks(albumTracks);
+      setFormated(true);
+    }
+    setTrackIndex(index);
+  };
+
+  useEffect(() => {
+    const updateAlbumPage = async () => {
+      await getAlbum(id);
+      await getAlbumMeta(id);
+    };
+
+    updateAlbumPage();
+    setFormated(false);
+  }, [id]);
+
+  useEffect(() => {
+    const updateAlbumList = async () => {
+      const artistId = album.albums[0].artists[0].id;
+      await getArtist(artistId);
+    };
+
+    updateAlbumList();
+  }, [album]);
 
   return (
     <div className="w-full flex">
@@ -104,7 +149,8 @@ const AlbumPage = () => {
           <div
             className="pl-4 grid grid-cols-3 sm:grid-cols-6 gap-2 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff26] cursor-pointer"
             key={index}
-            onClick={() => getTrackPreviewById(item.id)}
+            // onClick={() => getTrack(item.id)}
+            onClick={() => handlePlayAlbumTracks(index)}
           >
             <div className="col-span-5 flex items-center">
               <b className="mr-4 text-[#a7a7a7] font-bold w-[30px] inline-flex justify-center">
@@ -157,7 +203,7 @@ const AlbumPage = () => {
         </div>
         <div className="flex flex-col w-[400px] h-auto overflow-hidden bg-dark2  mx-2 mt-2 rounded-lg text-[#a7a7a7] cursor-pointer">
           <p className="text-white font-bold text-lg mt-2 ml-2">Recent</p>
-          {albumsAndSingles.slice(0, 8).map((album, index) => (
+          {albumList.slice(0, 8).map((album, index) => (
             <div
               key={index}
               className="flex items-center hover:bg-[#333333a1] px-1 md:px-2 py-1 md:py-2 rounded"
@@ -168,8 +214,8 @@ const AlbumPage = () => {
                 alt=""
                 className="w-14 rounded-sm"
               />
-              <div className="ml-2">
-                <p className="text-white font-medium text-nowrap overflow-hidden mr-2 mt-1">
+              <div className="ml-2 w-full">
+                <p className="text-white w-[300px] font-medium text-nowrap overflow-hidden mr-2 mt-1">
                   {album.releases.items[0].name}
                 </p>
                 <p className="flex items-center gap-1 text-[#999999] font-light text-[14px]">

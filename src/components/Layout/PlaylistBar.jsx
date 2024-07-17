@@ -8,10 +8,11 @@ const PlaylistBar = () => {
   const { playlist, setPlaylist, setTracks, setTrackIndex, currentUser } =
     useContext(PlayerContext);
 
-  const tracksUpdate = () => {
+  const tracksUpdate = (index) => {
     return new Promise((resolve, reject) => {
       try {
         setTracks(playlist.tracks);
+        setTrackIndex(index);
         resolve("playlist tracks updated");
       } catch (error) {
         reject("playlist tracks update failed");
@@ -21,8 +22,7 @@ const PlaylistBar = () => {
 
   const handleTrackUpdate = async (index) => {
     try {
-      await tracksUpdate();
-      setTrackIndex(index);
+      await tracksUpdate(index);
     } catch (error) {
       console.error(error);
     }
@@ -50,12 +50,12 @@ const PlaylistBar = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-auto bg-black ml-3 mr-2 mt-4 rounded-lg text-[#a7a7a7] cursor-pointer">
+    <div className="flex flex-col w-full h-auto bg-black ml-3 mr-2 mt-2 rounded-lg text-[#a7a7a7] cursor-pointer">
       {playlist &&
         playlist.tracks.map((track, index) => (
           <div
             key={index}
-            className="flex justify-between items-center bg-black hover:bg-dark3 px-2 py-2 rounded mr-4 relative"
+            className="flex justify-between items-center bg-black hover:bg-dark3 text-lightC hover:text-white p-1 rounded-sm mr-4 relative"
           >
             <div
               className="flex items-center"
@@ -64,22 +64,22 @@ const PlaylistBar = () => {
               <img
                 src={track.album.images[0].url}
                 alt=""
-                className="w-14 rounded-sm z-200"
+                className="w-12 rounded-sm z-200"
               />
               <div className="ml-2">
-                <p className="w-[120px] 2xl:w-[210px] text-white font-medium text-nowrap overflow-hidden mr-2 mt-1">
+                <p className="w-[120px] 2xl:w-[200px] font-medium text-sm text-nowrap overflow-hidden mr-2 mt-1">
                   {track.name}
                 </p>
-                <p className="flex items-center gap-1 text-[#999999] font-light text-[14px]">
+                <p className="flex items-center gap-1 text-light7 font-light text-xs">
                   {track.artists[0].name}
                 </p>
               </div>
             </div>
             <div
-              className="z-50 opacity-10 hover:opacity-50 p-1 cursor-pointer"
+              className="z-50 opacity-10 hover:opacity-60 p-1 cursor-pointer"
               onClick={() => removeFromPlaylist(index)}
             >
-              <img src={assets.trashCan} alt="" className="w-5" />
+              <img src={assets.trashCan} alt="" className="w-4" />
             </div>
           </div>
         ))}

@@ -1,5 +1,5 @@
 import TopArtists from "./TopArtists";
-import GenreKpop from "./GenreKpop";
+import GenreTracks from "./GenreTracks";
 
 const HomePage = () => {
   return (
@@ -7,9 +7,11 @@ const HomePage = () => {
       <hr className="opacity-25" />
       <TopArtists />
       <hr className="opacity-25 mt-10" />
-      <GenreKpop />
+      <GenreTracks genreIndex={0} />
       <hr className="opacity-25 mt-10" />
+      <GenreTracks genreIndex={1} />
       <hr className="opacity-25 mt-10" />
+      <GenreTracks genreIndex={2} />
     </div>
   );
 };

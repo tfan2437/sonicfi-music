@@ -28,24 +28,6 @@ export const trackRecommendationsByGenres = async (
   }
 };
 
-export const getTracksById = async (id) => {
-  try {
-    const response = await fetch(
-      `https://spotify23.p.rapidapi.com/tracks/?ids=${id}`,
-      options
-    );
-
-    if (!response.ok) {
-      throw new Error("Could not fetch the track data.");
-    }
-
-    const result = await response.json();
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 export const getAlbumById = async (id) => {
   try {
     const response = await fetch(

@@ -35,8 +35,7 @@ const signUp = async (name, email, password) => {
       name: name,
       email: email,
       authProvider: "Email",
-      profileImage:
-        "https://live.staticflickr.com/65535/53818372241_08c548fb4b_s.jpg",
+      profileImage: "",
     });
 
     console.log("Signed up successfully! User: " + user.displayName);

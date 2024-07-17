@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { formatMinutesAndSeconds } from "../utils/format";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../auth/firebase";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { PlayerContext } from "../context/PlayerContext";
 
 const DropdownMenu = ({ track }) => {
   const navigate = useNavigate();
 
-  const { currentUser, setPlaylist } = useContext(PlayerContext);
+  const { currentUser, setPlaylist, setShowLyrics } = useContext(PlayerContext);
 
   const menuSelection = [
     [assets.plus, "Add to playlist"],
@@ -72,18 +71,18 @@ const DropdownMenu = ({ track }) => {
       console.log("Add to playlist");
       addToPlaylist();
     } else if (index === 1) {
-      console.log("Navigate to: " + targetTrack.artist.id);
-      navigate(`/artist/${targetTrack.artist.id}`);
+      console.log("Navigate to: " + targetTrack.artists[0].id);
+      navigate(`/artist/${targetTrack.artists[0].id}`);
     } else if (index === 2) {
       console.log("Navigate to: " + targetTrack.album.id);
       navigate(`/album/${targetTrack.album.id}`);
     } else {
-      console.log("targetTrack");
+      setShowLyrics((prev) => !prev);
     }
   };
 
   return (
-    <div className="absolute top-[32px] right-[4px] w-auto h-auto z-20 bg-[#00000071] backdrop-blur-2xl rounded-md">
+    <div className="absolute top-[32px] right-[4px] w-auto h-auto bg-[#00000071] backdrop-blur-2xl rounded-md">
       {menuSelection.map((selection, index) => (
         <div
           key={index}

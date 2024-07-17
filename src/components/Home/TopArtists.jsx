@@ -11,7 +11,7 @@ const TopArtists = () => {
   return (
     <div className="w-full h-auto">
       <div className="w-full flex justify-between items-end mt-2 mb-5">
-        <p className="font-bold text-3xl">Top Artists</p>
+        <p className="font-bold text-2xl">Top Artists</p>
         <p
           className="text-light7 hover:text-lightB font-medium cursor-pointer pr-5"
           onClick={() => setShowMore((prev) => !prev)}

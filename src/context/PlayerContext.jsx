@@ -1,11 +1,12 @@
 import { createContext, useEffect, useRef, useState } from "react";
-import { songsData } from "../assets/assets";
 import { options } from "../utils/spotifyAPI";
-import { getTracksResult } from "../data/fetchObjects";
+import { filterSearchResult } from "../utils/format";
 import {
   albumMetaPlaceholder,
   albumPlaceholder,
   artistPlaceholder,
+  genreTracksPlaceholder,
+  searchPlaceholder,
   trackPlaceholder,
 } from "../data/placeholder";
 export const PlayerContext = createContext();
@@ -17,18 +18,30 @@ const PlayerContextProvider = ({ children }) => {
   const displayRef = useRef();
 
   const [currentUser, setCurrentUser] = useState(null);
+  const [userImage, setUserImage] = useState("");
   const [playlist, setPlaylist] = useState(null);
 
   const [track, setTrack] = useState(trackPlaceholder.tracks[0]);
   const [tracks, setTracks] = useState(trackPlaceholder.tracks);
   const [trackIndex, setTrackIndex] = useState(0);
 
-  const [playStatus, setPlayStatus] = useState(false);
+  const [showLyrics, setShowLyrics] = useState(false);
+  const [lyrics, setLyrics] = useState("");
 
   const [artist, setArtist] = useState(artistPlaceholder);
   const [album, setAlbum] = useState(albumPlaceholder);
   const [albumMeta, setAlbumMeta] = useState(albumMetaPlaceholder);
 
+  const [kpopTracks, setKpopTracks] = useState(genreTracksPlaceholder.tracks);
+  const [hippopTracks, setHippopTracks] = useState(
+    genreTracksPlaceholder.tracks
+  );
+  const [popTracks, setPopTracks] = useState(genreTracksPlaceholder.tracks);
+
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchResult, setSearchResult] = useState(searchPlaceholder);
+
+  const [playStatus, setPlayStatus] = useState(false);
   const [time, setTime] = useState({
     currentTime: {
       second: 0,
@@ -94,11 +107,27 @@ const PlayerContextProvider = ({ children }) => {
     return `${toTwoDigit(time.minute)}:${toTwoDigit(time.second)}`;
   };
 
-  // track
-  // play
-  // section
+  // GET
 
-  const getTrackPreviewById = async (id) => {
+  const getSearch = async (keyword) => {
+    try {
+      const formatedKeyword = keyword.toLowerCase().replace(/ /g, "%20");
+      const response = await fetch(
+        `https://spotify23.p.rapidapi.com/search/?q=${formatedKeyword}&type=multi&offset=0&limit=20&numberOfTopResults=10`,
+        options
+      );
+      if (!response.ok) {
+        throw new Error("Could not fetch the search data.");
+      }
+      const result = await response.json();
+      const filteredResult = await filterSearchResult(result);
+      setSearchResult(filteredResult);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getTrack = async (id) => {
     try {
       const response = await fetch(
         `https://spotify23.p.rapidapi.com/tracks/?ids=${id}`,
@@ -110,6 +139,33 @@ const PlayerContextProvider = ({ children }) => {
       const result = await response.json();
       setTracks(result.tracks);
       setTrackIndex(0);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getLyrics = async (id) => {
+    try {
+      const response = await fetch(
+        `https://spotify23.p.rapidapi.com/track_lyrics/?id=${id}`,
+        options
+      );
+
+      if (!response.ok) {
+        throw new Error("Could not fetch the track data.");
+      }
+
+      const result = await response.json();
+      console.log(result);
+
+      const formatLyrics = (result) => {
+        const lines = result.lyrics.lines;
+        const formattedLyrics = lines.map((line) => line.words).join("\n");
+        return formattedLyrics;
+      };
+
+      const formattedLyrics = formatLyrics(result);
+      setLyrics(formattedLyrics);
     } catch (error) {
       console.error(error);
     }
@@ -195,7 +251,7 @@ const PlayerContextProvider = ({ children }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      audioRef.current.ontimeupdate = () => {
+      const updateSeekBar = () => {
         seekBar.current.style.width =
           (
             (audioRef.current.currentTime / audioRef.current.duration) *
@@ -217,6 +273,16 @@ const PlayerContextProvider = ({ children }) => {
           setPlayStatus(false);
         }
       };
+
+      if (audioRef.current) {
+        audioRef.current.ontimeupdate = updateSeekBar;
+      }
+
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.ontimeupdate = null;
+        }
+      };
     }, 1000);
   }, [audioRef]);
 
@@ -236,7 +302,7 @@ const PlayerContextProvider = ({ children }) => {
     previous,
     next,
     seekSong,
-    getTrackPreviewById,
+    getTrack,
     formatTime,
 
     getArtist,
@@ -257,6 +323,26 @@ const PlayerContextProvider = ({ children }) => {
     setTracks,
     trackIndex,
     setTrackIndex,
+    getLyrics,
+    showLyrics,
+    setShowLyrics,
+    lyrics,
+    setLyrics,
+
+    hippopTracks,
+    setHippopTracks,
+    popTracks,
+    setPopTracks,
+    kpopTracks,
+    setKpopTracks,
+
+    userImage,
+    setUserImage,
+    showSearch,
+    setShowSearch,
+    getSearch,
+    searchResult,
+    setSearchResult,
   };
 
   return (

@@ -1,8 +1,8 @@
-import Player from "../Player";
+import Player from "../Player/Player";
 import Sidebar from "./Sidebar";
 import { useContext } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "../Navbar";
+import Navbar from "./Navbar";
 import { PlayerContext } from "../../context/PlayerContext";
 
 const MainLayout = () => {

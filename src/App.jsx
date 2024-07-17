@@ -1,4 +1,4 @@
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import { useContext, useEffect } from "react";
 import { PlayerContext } from "./context/PlayerContext";
 import { onAuthStateChanged } from "firebase/auth";
@@ -12,12 +12,12 @@ import AlbumPage from "./components/Album/AlbumPage";
 import HomePage from "./components/Home/HomePage";
 
 import { doc, getDoc } from "firebase/firestore";
-import { getTracksById } from "./utils/spotifyAPI";
+import SearchResult from "./components/Search/SearchResult";
 
 const App = () => {
   const navigate = useNavigate();
 
-  const { currentUser, setCurrentUser, setPlaylist } =
+  const { currentUser, setCurrentUser, setPlaylist, setUserImage } =
     useContext(PlayerContext);
 
   // User auth status check
@@ -28,13 +28,13 @@ const App = () => {
         const userDoc = await getDoc(userRef);
         const userData = userDoc.data();
         setCurrentUser(userData);
-        console.log("user valid");
+        setUserImage(userData.profileImage);
       } else {
-        console.log("No User");
         navigate("/login");
       }
     });
-    // getTracksById("7CyPwkp0oE8Ro9Dd5CUDjW");
+
+    // getTrack("7CyPwkp0oE8Ro9Dd5CUDjW");
     return () => unsubscribe();
   }, []);
 
@@ -64,6 +64,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/album/:id" element={<AlbumPage />} />
         <Route path="/artist/:id" element={<ArtistPage />} />
+        <Route path="/searchresult/*" element={<SearchResult />} />
       </Route>
     </Routes>
   );

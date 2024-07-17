@@ -6,39 +6,68 @@ import { genresList } from "../../data/genresList";
 import { assets } from "../../assets/assets";
 import DropdownMenu from "../DropdownMenu";
 
-const GenreKpop = () => {
-  // useEffect(() => {
-  //   const genreTracks = async () => {
-  //     try {
-  //       const randomIndex = randomInt(5);
-  //       const result = await getTracksByGenre(
-  //         35,
-  //         genresList.kpop.tracksAndArtists[randomIndex][0],
-  //         genresList.kpop.tracksAndArtists[randomIndex][1],
-  //         genresList.kpop.genre
-  //       );
+const GenreTracks = ({ genreIndex }) => {
+  const {
+    getTracksByGenre,
+    setTracks,
+    setTrackIndex,
+    hippopTracks,
+    setHippopTracks,
+    popTracks,
+    setPopTracks,
+    kpopTracks,
+    setKpopTracks,
+  } = useContext(PlayerContext);
 
-  //       // Filter out the low popularity tracks
-  //       const filteredTracks = result.tracks.filter(
-  //         (track) => track.popularity >= 50
-  //       );
-  //       const tracks = [...filteredTracks];
-  //       setTracksData(tracks);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const genreMap = [
+    {
+      tracks: hippopTracks,
+      setTracks: setHippopTracks,
+    },
+    {
+      tracks: popTracks,
+      setTracks: setPopTracks,
+    },
+    {
+      tracks: kpopTracks,
+      setTracks: setKpopTracks,
+    },
+  ];
 
-  //   genreTracks();
-  // }, []);
-
-  const { getTracksByGenre, getTrackPreviewById } = useContext(PlayerContext);
+  const genreTracks = genreMap[genreIndex].tracks;
+  const genreTracksLess = genreMap[genreIndex].tracks.slice(0, 7);
+  const genreSetTracks = genreMap[genreIndex].setTracks;
 
   const [showMore, setShowMore] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
   const [activedIndex, setActivedIndex] = useState(null);
-  const [tracksData, setTracksData] = useState(genreTracksPlaceholder.tracks);
-  const tracksLess = tracksData.slice(0, 7);
+
+  useEffect(() => {
+    const getGenreTracks = async () => {
+      try {
+        const randomIndex = randomInt(5);
+        const result = await getTracksByGenre(
+          30,
+          genresList[genreIndex].items[randomIndex].trackId,
+          genresList[genreIndex].items[randomIndex].artistID,
+          genresList[genreIndex].genre
+        );
+
+        const popularityLimit = genreIndex === 2 ? 50 : 65;
+        // Filter out the low popularity tracks
+        const filteredTracks = result.tracks.filter(
+          (track) => track.popularity >= popularityLimit
+        );
+        const tracks = [...filteredTracks];
+        genreSetTracks(tracks);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (genreTracks === genreTracksPlaceholder.tracks) {
+      getGenreTracks();
+    }
+  }, []);
 
   const handleMenu = (index) => {
     if (activedIndex === index) {
@@ -48,10 +77,15 @@ const GenreKpop = () => {
     }
   };
 
+  const handlePlayTrack = (index) => {
+    setTracks(genreTracks);
+    setTrackIndex(index);
+  };
+
   return (
     <div className="w-full h-auto">
       <div className="w-full flex justify-between items-end mt-2 mb-5">
-        <p className="font-bold text-3xl">K-Pop</p>
+        <p className="font-bold text-2xl">{genresList[genreIndex].title}</p>
         <p
           className="text-light7 hover:text-lightB font-medium cursor-pointer pr-5"
           onClick={() => setShowMore((prev) => !prev)}
@@ -60,10 +94,10 @@ const GenreKpop = () => {
         </p>
       </div>
       <div className="grid grid-cols-7 gap-4 pr-5 ">
-        {(showMore ? tracksData : tracksLess).map((track, index) => (
+        {(showMore ? genreTracks : genreTracksLess).map((track, index) => (
           <div key={index} className="col-span-1 relative">
             <div
-              className="absolute top-[4px] right-[4px] z-50 opacity-30 hover:opacity-100 bg-[#00000051] backdrop-blur-xl p-1 rounded-full cursor-pointer"
+              className="absolute top-[4px] right-[4px] opacity-30 hover:opacity-100 bg-[#00000051] backdrop-blur-xl p-1 rounded-full cursor-pointer"
               onClick={() => handleMenu(index)}
             >
               <img src={assets.more} alt="" className="w-4" />
@@ -76,7 +110,7 @@ const GenreKpop = () => {
 
             <div
               className="cursor-pointer text-lightC hover:text-white"
-              onClick={() => getTrackPreviewById(track.id)}
+              onClick={() => handlePlayTrack(index)}
             >
               <img
                 src={track.album.images[0].url}
@@ -99,4 +133,4 @@ const GenreKpop = () => {
   );
 };
 
-export default GenreKpop;
+export default GenreTracks;

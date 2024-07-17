@@ -9,7 +9,7 @@ import ArtistBio from "./ArtistBio";
 
 const ArtistPage = () => {
   const { id } = useParams();
-  const { getTrackPreviewById, getArtist, artist } = useContext(PlayerContext);
+  const { getTrack, getArtist, artist } = useContext(PlayerContext);
   const [hoveredTrackIndex, setHoveredTrackIndex] = useState(null);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const ArtistPage = () => {
         <div
           className="relative pl-4 grid grid-cols-3 sm:grid-cols-6 gap-2 p-2 items-center text-[#a7a7a7] hover:bg-[#ffffff26] cursor-pointer"
           key={index}
-          onClick={() => getTrackPreviewById(item.track.id)}
+          onClick={() => getTrack(item.track.id)}
           onMouseEnter={() => setHoveredTrackIndex(index)}
           onMouseLeave={() => setHoveredTrackIndex(null)}
         >

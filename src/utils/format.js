@@ -47,3 +47,64 @@ export const formatBioText = (bioText) => {
 export function randomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
+// filter
+export const filterSearchResult = (data) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const filteredAlbums = data.albums.items.slice(0, 10).map((album) => ({
+        id: album.data.uri.slice(14, 36),
+        name: album.data.name,
+        images: album.data.coverArt.sources[0].url,
+        artists: album.data.artists.items.map((artist) => ({
+          id: artist.uri.slice(15, 37),
+          name: artist.profile.name,
+        })),
+      }));
+
+      const filteredArtists = data.artists.items.slice(0, 10).map((artist) => ({
+        id: artist.data.uri.slice(15, 37),
+        name: artist.data.profile.name,
+        images: artist.data.visuals?.avatarImage?.sources[0]?.url || "",
+      }));
+
+      const filteredTracks = data.tracks.items.slice(0, 20).map((track) => ({
+        album: {
+          id: track.data.albumOfTrack.id,
+          name: track.data.albumOfTrack.name,
+          images: [
+            {
+              url: track.data.albumOfTrack.coverArt.sources[0].url,
+            },
+          ],
+        },
+        artists: [
+          {
+            id: track.data.artists.items[0].uri.slice(15, 37),
+            name: track.data.artists.items[0].profile.name,
+          },
+        ],
+        duration_ms: track.data.duration.totalMilliseconds,
+        id: track.data.id,
+        name: track.data.name,
+        popularity: 0,
+        preview_url: "",
+      }));
+
+      const result = {
+        albums: {
+          items: filteredAlbums,
+        },
+        artists: {
+          items: filteredArtists,
+        },
+        tracks: {
+          items: filteredTracks,
+        },
+      };
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

@@ -1,12 +1,12 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, signUp, login, loginWithGoogle } from "../auth/firebase";
+import { auth, signUp, login, loginWithGoogle } from "../../auth/firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import streamFiLogo from "../assets/streamfi-logo-white.png";
-import googleIcon from "../assets/google-g-icon.png";
+import streamFiLogo from "../../assets/streamfi-logo-white.png";
+import googleIcon from "../../assets/google-g-icon.png";
 import MuiSwitch from "./MuiSwitch";
-import eyeShow from "../assets/icon-password-show.png";
-import eyeHide from "../assets/icon-password-hide.png";
+import eyeShow from "../../assets/icon-password-show.png";
+import eyeHide from "../../assets/icon-password-hide.png";
 
 const Login = () => {
   const [username, setUsername] = useState("");
