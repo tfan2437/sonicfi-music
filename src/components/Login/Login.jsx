@@ -22,7 +22,7 @@ const Login = () => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         navigate("/");
-        // window.location.reload();
+        window.location.reload();
       }
     });
   }, []);

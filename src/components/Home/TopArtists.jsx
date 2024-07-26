@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { topArtists } from "../../data/topArtists";
 import { useNavigate } from "react-router-dom";
+import { responsiveGrid } from "../../data/tailwindStyle";
 
 const TopArtists = () => {
   const [showMore, setShowMore] = useState(false);
@@ -19,7 +20,7 @@ const TopArtists = () => {
           {showMore ? "Show Less" : "Show More"}
         </p>
       </div>
-      <div className="grid grid-cols-7 gap-4 pr-5 gap-y-6">
+      <div className={`${responsiveGrid}`}>
         {(showMore ? topArtists : topArtistsLess).map((artist, index) => (
           <div
             key={index}

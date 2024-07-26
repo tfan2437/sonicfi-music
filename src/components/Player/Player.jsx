@@ -29,11 +29,39 @@ const Player = () => {
     if (tracks != trackPlaceholder.tracks) play();
   }, [tracks, trackIndex]);
 
+  const playIconStyle = "h-auto w-5 md:w-4 cursor-pointer";
+
   return (
-    <div className="h-[10%] bg-black relative">
+    <div className="h-auto md:h-[10%] rounded-t-xl md:rounded-t-none  w-full bg-[#86868649] md:bg-black backdrop-blur-lg fixed bottom-0 md:relative">
       {showLyrics && <LyricsBox />}
+      {/* Responsive */}
+      <div className="flex md:hidden gap-2 mx-6 mt-4 items-center">
+        <img
+          className="w-[25%] rounded"
+          src={tracks[trackIndex].album.images[0].url}
+          alt=""
+        />
+        <div className="text-nowrap overflow-hidden">
+          <p className="text-white font-semibold text-lg">
+            {tracks[trackIndex].name}
+          </p>
+          <p className="text-lightA font-light">
+            {tracks[trackIndex].artists.map((artist) => artist.name).join(", ")}
+          </p>
+        </div>
+      </div>
       <ProgressBar />
-      <div className="h-full bg-black flex justify-between items-center px-4">
+      {/* Responsive */}
+      <div className="w-full justify-between flex md:hidden items-center font-light text-sm text-light9 px-6 mb-6">
+        <p className="inline-flex justify-center">
+          {formatTime(time.currentTime)}
+        </p>
+        <p className="inline-flex justify-center">
+          {formatTime(time.totalTime)}
+        </p>
+      </div>
+
+      <div className="h-auto md:h-full flex justify-between items-center md:px-4 mx-7 md:mx-0">
         <div className="w-[350px] hidden lg:flex items-center gap-4 ">
           <img
             className="w-16"
@@ -51,43 +79,51 @@ const Player = () => {
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-1 m-auto">
-          <div className="flex gap-4">
+        <div className="w-full flex flex-col items-center gap-1 mb-10 md:mb-0">
+          <div className="w-full md:w-auto flex justify-between md:gap-4">
             <div
               className="cursor-pointer"
               onClick={() => setRandom((prev) => !prev)}
             >
               {random ? (
-                <img className="w-4" src={assets.randomBlue} alt="" />
+                <img
+                  className={`${playIconStyle}`}
+                  src={assets.randomBlue}
+                  alt=""
+                />
               ) : (
-                <img className="w-4" src={assets.random} alt="" />
+                <img
+                  className={`${playIconStyle}`}
+                  src={assets.random}
+                  alt=""
+                />
               )}
             </div>
             <img
               onClick={previous}
-              className="w-4 cursor-pointer"
-              src={assets.prev_icon}
+              className={`${playIconStyle}`}
+              src={assets.playerPrev}
               alt=""
             />
             {playStatus ? (
               <img
                 onClick={pause}
-                className="w-4 cursor-pointer"
-                src={assets.pause_icon}
+                className={`${playIconStyle}`}
+                src={assets.playerPause}
                 alt=""
               />
             ) : (
               <img
                 onClick={play}
-                className="w-4 cursor-pointer"
-                src={assets.play_icon}
+                className={`${playIconStyle}`}
+                src={assets.playerPlay}
                 alt=""
               />
             )}
             <img
               onClick={next}
-              className="w-4 cursor-pointer"
-              src={assets.next_icon}
+              className={`${playIconStyle}`}
+              src={assets.playerNext}
               alt=""
             />
             <div
@@ -95,9 +131,13 @@ const Player = () => {
               onClick={() => setLoop((prev) => !prev)}
             >
               {loop ? (
-                <img className="w-4" src={assets.loopBlue} alt="" />
+                <img
+                  className={`${playIconStyle}`}
+                  src={assets.loopBlue}
+                  alt=""
+                />
               ) : (
-                <img className="w-4" src={assets.loop} alt="" />
+                <img className={`${playIconStyle}`} src={assets.loop} alt="" />
               )}
             </div>
           </div>

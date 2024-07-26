@@ -3,7 +3,7 @@ import GenreTracks from "./GenreTracks";
 
 const HomePage = () => {
   return (
-    <div className="w-full h-full pt-[65px]">
+    <div className="w-full h-full pt-[65px] pl-5 lg:pl-0">
       <hr className="opacity-25" />
       <TopArtists />
       <hr className="opacity-25 mt-10" />

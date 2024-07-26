@@ -82,6 +82,9 @@ const GenreTracks = ({ genreIndex }) => {
     setTrackIndex(index);
   };
 
+  const responsiveGrid =
+    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4 pr-5 gap-y-6";
+
   return (
     <div className="w-full h-auto">
       <div className="w-full flex justify-between items-end mt-2 mb-5">
@@ -93,7 +96,7 @@ const GenreTracks = ({ genreIndex }) => {
           {showMore ? "Show Less" : "Show More"}
         </p>
       </div>
-      <div className="grid grid-cols-7 gap-4 pr-5 ">
+      <div className={`${responsiveGrid}`}>
         {(showMore ? genreTracks : genreTracksLess).map((track, index) => (
           <div key={index} className="col-span-1 relative">
             <div

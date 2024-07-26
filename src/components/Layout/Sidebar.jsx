@@ -18,12 +18,14 @@ const Sidebar = () => {
   const unactivedStyle =
     "text-white bg-black hover:text-black hover:bg-white transition-all py-0.5 px-2 rounded-full text-sm font-semibold cursor-pointer";
 
+  const responsiveUnactivedStyle =
+    "text-white bg-black hover:text-black hover:bg-white transition-all py-0.5 px-2 rounded-full text-sm font-semibold cursor-pointer hidden xl:block";
   return (
     <div className="w-[20%] h-full hidden lg:flex flex-col p-2 text-white overflow-auto">
       <div className="bg-black h-auto flex flex-col gap-4 pl-4 pb-4">
         <NavLink to={"/"}>
           <div className="pt-3 pb-2">
-            <img src={assets.logoBlue} alt="" className="h-5 w-auto 2xl:h-7" />
+            <img src={assets.logoBlue} alt="" className="h-9 w-auto" />
           </div>
         </NavLink>
 
@@ -66,7 +68,7 @@ const Sidebar = () => {
           <div className="flex gap-2 mt-3 mx-4">
             <p className={activedStyle}>Tracks</p>
             <p className={unactivedStyle}>Albums</p>
-            <p className={unactivedStyle}>Artists</p>
+            <p className={responsiveUnactivedStyle}>Artists</p>
           </div>
           <PlaylistBar />
         </div>
