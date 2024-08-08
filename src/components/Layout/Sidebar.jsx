@@ -52,7 +52,7 @@ const Sidebar = () => {
           <p className="font-bold text-base">Log Out</p>
         </div>
       </div>
-      <div className="bg-[#121212]">
+      <div className="bg-[#000000]">
         <div className="flex justify-between items-center">
           <div
             className="flex items-center gap-[7px] pl-4 opacity-85 hover:opacity-100 cursor-pointer"
