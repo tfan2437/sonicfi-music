@@ -2,7 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, signUp, login, loginWithGoogle } from "../../auth/firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import streamFiLogo from "../../assets/streamfi-logo-white.png";
+import sonicfiLogo from "../../assets/sonicfi-logo-text-white.png";
 import googleIcon from "../../assets/google-g-icon.png";
 import MuiSwitch from "./MuiSwitch";
 import eyeShow from "../../assets/icon-password-show.png";
@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <div className="flex flex-col items-center h-[100vh] w-[100vw] bg-[url('./assets/background-post-malone.png')] bg-cover bg-center">
       <div className="flex flex-col items-center mt-[40px] mb-[80px] md:mb-[120px] lg:mb-[160px]">
-        <img src={streamFiLogo} alt="" className="h-[30px] w-auto" />
+        <img src={sonicfiLogo} alt="" className="h-[36px] w-auto" />
       </div>
       <div>
         <div className="flex flex-col w-[350px] md:w-[390px] h-auto bg-[#000000a1] backdrop-blur-lg rounded-xl py-2 px-6 mb-6">
