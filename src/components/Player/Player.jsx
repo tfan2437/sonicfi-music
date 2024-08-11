@@ -35,7 +35,6 @@ const Player = () => {
     <div className="h-auto md:h-[10%] rounded-t-xl md:rounded-t-none  w-full bg-[#86868649] md:bg-black backdrop-blur-lg fixed bottom-0 md:relative">
       {showLyrics && <LyricsBox />}
       {/* Responsive */}
-      <div className="flex md:hidden gap-2 mx-6 mt-4 w-full h-2 bg-red-500"></div>
       <div className="flex md:hidden gap-2 mx-6 mt-4 items-center">
         <img
           className="w-[25%] rounded"
